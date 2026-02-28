@@ -18,6 +18,7 @@ def animate(
     obstacles: list[tuple[int, int]] | None = None,
     fire_history: list[list[list[int]]] | None = None,
     interval_ms: int = 800,
+    smooth_substeps: int = 6,
 ):
     """
     Play back a recorded simulation as a matplotlib animation.
@@ -35,17 +36,10 @@ def animate(
     fig.patch.set_facecolor("#1a1a2e")
     ax.set_facecolor("#16213e")
 
-    # Grid lines
-    for x in range(width + 1):
-        ax.axvline(x - 0.5, color="#0f3460", linewidth=0.5, zorder=0)
-    for y in range(height + 1):
-        ax.axhline(y - 0.5, color="#0f3460", linewidth=0.5, zorder=0)
-
     ax.set_xlim(-0.5, width - 0.5)
     ax.set_ylim(-0.5, height - 0.5)
-    ax.set_xticks(range(width))
-    ax.set_yticks(range(height))
-    ax.tick_params(colors="gray", labelsize=7)
+    ax.set_aspect("equal")
+    ax.set_axis_off()
 
     # Door markers (static)
     for dx, dy in door_positions:
@@ -121,13 +115,41 @@ def animate(
         scatters[name] = sc
         labels[name] = lbl
 
-    def update(frame):
-        step_data = history[frame]
-        active = sum(1 for v in step_data.values() if v != "exited")
-        title.set_text(f"Step {frame + 1} / {len(history)}  |  {active} agents remaining")
+    smooth_substeps = max(1, int(smooth_substeps))
+    if len(history) <= 1:
+        total_frames = len(history)
+    else:
+        total_frames = 1 + (len(history) - 1) * smooth_substeps
 
-        for name, pos in step_data.items():
-            if pos == "exited":
+    def _interp_pos(p0, p1, alpha: float):
+        if p0 == "exited" and p1 == "exited":
+            return None
+        if p0 == "exited" and p1 != "exited":
+            return tuple(p1)
+        if p0 != "exited" and p1 == "exited":
+            return tuple(p0) if alpha < 1.0 else None
+        x = (1.0 - alpha) * p0[0] + alpha * p1[0]
+        y = (1.0 - alpha) * p0[1] + alpha * p1[1]
+        return (x, y)
+
+    def update(frame):
+        if len(history) <= 1 or smooth_substeps == 1:
+            base_idx = min(frame, len(history) - 1)
+            next_idx = base_idx
+            alpha = 0.0
+        else:
+            base_idx = min(frame // smooth_substeps, len(history) - 1)
+            next_idx = min(base_idx + 1, len(history) - 1)
+            alpha = (frame % smooth_substeps) / smooth_substeps if next_idx > base_idx else 0.0
+
+        step_data = history[base_idx]
+        next_data = history[next_idx]
+        active = sum(1 for v in step_data.values() if v != "exited")
+        title.set_text(f"Step {base_idx + 1} / {len(history)}  |  {active} agents remaining")
+
+        for name in agent_names:
+            pos = _interp_pos(step_data[name], next_data[name], alpha)
+            if pos is None:
                 scatters[name].set_offsets(np.array([[-10, -10]]))
                 labels[name].set_position((-10, -10))
             else:
@@ -136,8 +158,9 @@ def animate(
                 labels[name].set_position((x, y + 0.35))
 
         frame_fires = []
-        if fire_history and frame < len(fire_history):
-            frame_fires = fire_history[frame]
+        fire_idx = base_idx if alpha < 0.5 else next_idx
+        if fire_history and fire_idx < len(fire_history):
+            frame_fires = fire_history[fire_idx]
         fire_grid = np.zeros((height, width), dtype=int)
         for fx, fy in frame_fires:
             if 0 <= fx < width and 0 <= fy < height:
@@ -149,8 +172,8 @@ def animate(
     ani = animation.FuncAnimation(
         fig,
         update,
-        frames=len(history),
-        interval=interval_ms,
+        frames=total_frames,
+        interval=max(16, interval_ms // smooth_substeps),
         blit=False,
         repeat=True,
     )

@@ -1,9 +1,9 @@
 environment:
-  width: 10
-  height: 10
+  width: 80
+  height: 80
   deadline: 20
   llm_model: "openai/gpt-5.2"
-  num_agents: 5
+  num_agents: 20
   random_seed: 42
   agent_name_prefix: "Agent"
   fire:
