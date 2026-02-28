@@ -5,3 +5,14 @@ __pycache__/
 **/__pycache__/
 *.pyc
 **/.DS_Store
+
+# Frontend build/dependency artifacts
+ui/node_modules/
+ui/dist/
+ui/.vite/
+ui/.cache/
+
+# Frontend local env files
+ui/.env
+ui/.env.local
+ui/.env.*.local
