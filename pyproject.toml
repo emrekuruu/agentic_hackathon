@@ -13,6 +13,8 @@ anthropic = "*"
 python-dotenv = "*"
 pyyaml = "*"
 openai = "*"
+streamlit = ">=1.35"
+plotly = ">=5.22"
 
 [build-system]
 requires = ["poetry-core"]
