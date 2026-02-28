@@ -17,7 +17,7 @@ def main():
         history=data["history"],
         width=data["width"],
         height=data["height"],
-        door_position=tuple(data["door_position"]),
+        door_positions=[tuple(d) for d in data["door_positions"]],
         obstacles=[tuple(o) for o in data.get("obstacles", [])],
     )
 

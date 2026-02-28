@@ -16,14 +16,14 @@ def main():
         cfg = yaml.safe_load(f)
 
     env = cfg["environment"]
-    door_position = tuple(env["door"])
+    door_positions = [tuple(d) for d in env["doors"]]
     obstacles = [tuple(o) for o in env.get("obstacles", [])]
 
     model = EvaluationModel(
         width=env["width"],
         height=env["height"],
         deadline=env["deadline"],
-        door_position=door_position,
+        door_positions=door_positions,
         agent_configs=cfg["agents"],
         llm_model=env["llm_model"],
         obstacles=obstacles,
@@ -48,7 +48,7 @@ def main():
     trajectory = {
         "width": env["width"],
         "height": env["height"],
-        "door_position": list(door_position),
+        "door_positions": [list(d) for d in door_positions],
         "obstacles": [list(o) for o in obstacles],
         "history": model.position_history,
     }

@@ -13,7 +13,7 @@ def animate(
     history: list[dict],
     width: int,
     height: int,
-    door_position: tuple[int, int],
+    door_positions: list[tuple[int, int]],
     obstacles: list[tuple[int, int]] | None = None,
     interval_ms: int = 800,
 ):
@@ -23,7 +23,7 @@ def animate(
     history: list of dicts, one per step.
              Each dict maps agent name -> (x, y) or "exited".
     width, height: grid dimensions.
-    door_position: (x, y) of the exit door.
+    door_positions: list of (x, y) exit door positions.
     interval_ms: milliseconds between frames.
     """
     agent_names = list(history[0].keys())
@@ -45,19 +45,19 @@ def animate(
     ax.set_yticks(range(height))
     ax.tick_params(colors="gray", labelsize=7)
 
-    # Door marker (static)
-    dx, dy = door_position
-    door_rect = mpatches.FancyBboxPatch(
-        (dx - 0.45, dy - 0.45), 0.9, 0.9,
-        boxstyle="round,pad=0.05",
-        linewidth=2, edgecolor="#f1c40f", facecolor="#f39c1244",
-        zorder=2,
-    )
-    ax.add_patch(door_rect)
-    ax.text(
-        dx, dy, "EXIT", ha="center", va="center",
-        fontsize=7, color="#f1c40f", fontweight="bold", zorder=3,
-    )
+    # Door markers (static)
+    for dx, dy in door_positions:
+        door_rect = mpatches.FancyBboxPatch(
+            (dx - 0.45, dy - 0.45), 0.9, 0.9,
+            boxstyle="round,pad=0.05",
+            linewidth=2, edgecolor="#f1c40f", facecolor="#f39c1244",
+            zorder=2,
+        )
+        ax.add_patch(door_rect)
+        ax.text(
+            dx, dy, "EXIT", ha="center", va="center",
+            fontsize=7, color="#f1c40f", fontweight="bold", zorder=3,
+        )
 
     # Obstacle markers (static)
     for ox, oy in (obstacles or []):
