@@ -7,6 +7,10 @@ __pycache__/
 **/.DS_Store
 
 # Frontend build/dependency artifacts
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
 ui/node_modules/
 ui/dist/
 ui/.vite/

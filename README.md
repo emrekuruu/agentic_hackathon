@@ -1,222 +1,148 @@
-# Agentic Hackathon — LLM Agent Evaluation Simulation
+# CrowdFlow Simulator
 
-A spatial simulation where every "human" participant is an LLM agent. Agents have distinct personalities, roles, and memories. They navigate a 2D grid, speak to nearby participants, and try to exit through a door. Built on [Mesa](https://mesa.readthedocs.io/) + [Mesa-LLM](https://github.com/projectmesa/mesa-llm).
-
----
+A browser-based, agent-driven crowd simulation for estimating maximum safe capacity of an event venue.
 
 ## Quick Start
 
 ```bash
-# 1. Install dependencies
-poetry install
-
-# 2. Add your API key
-echo "OPENAI_API_KEY=sk-..." > .env
-
-# 3. Run
-python -m simulation.run
+cd simulation
+npm install
+npm run dev
 ```
+
+Then open http://localhost:5173 in your browser.
+
+---
+
+## How to Run Your First Simulation
+
+1. **Open the app** – the default *Concert Hall* sample venue loads automatically.
+2. **Switch to the Simulation tab** (top nav).
+3. **Set N** – use the "Total N" slider in the right panel (default: 500).
+4. **Click ▶ Run** – agents spawn at the two top entrances and walk toward the Stage, Bars, and WCs.
+5. **Watch the heatmap** – density colours shift from green → orange → red as areas crowd.
+6. **Enable Evacuation** – check "Enable evacuation" in the controls panel. Agents will switch to exits at the configured time.
+7. **View metrics** – right panel shows peak density, egress times, queue lengths.
+8. **Click ↺ Reset** to restart with the same or modified parameters.
+
+---
+
+## Venue Editor
+
+Switch to the **✏ Venue Editor** tab to design your own floor plan:
+
+| Tool | Action |
+|------|--------|
+| Wall | Click + drag to draw a rectangular obstacle |
+| Entrance | Click to place a spawn point (green bar) |
+| Exit | Click to place an evacuation exit (red bar) |
+| Attractor | Click to place stage / bar / toilet with weight + service time |
+| Select | Click to select; **Delete** key removes the element |
+
+- **Snap to grid** keeps everything aligned to a 2 m grid (configurable).
+- **Save Venue** / **Upload Venue** export/import the layout as JSON.
+- **Load Sample** restores the built-in concert hall.
+
+---
+
+## Simulation Controls
+
+| Parameter | Description |
+|-----------|-------------|
+| **N** | Total participants |
+| **Arrival mode** | Burst (all at once), Linear (steady stream), Gaussian (bell-curve peak) |
+| **Arrival duration** | Minutes over which participants arrive |
+| **Speed min/mean/max** | Walking speed distribution (m/s); default ≈1.4 m/s (5 km/h) |
+| **Personal space** | Repulsion radius between agents (metres) |
+| **Avoidance strength** | How strongly agents push each other apart |
+| **Queue behaviour** | Toggle queuing at attractors on/off |
+| **Evacuation** | When to trigger; panic-speed multiplier |
+| **Warning / Danger thresholds** | Density limits (pers/m²) |
+| **Heatmap cell size** | Spatial resolution of the density grid |
+
+---
+
+## How the Model Works
+
+### Agent-Based Simulation
+
+Each agent is a circle with position, velocity, and radius (~0.25 m). Agents follow a simple state machine:
+
+```
+spawn → seeking_attractor → queuing → at_attractor → seeking_exit → exited
+                                       ↑ evacuation triggers transition
+```
+
+### Movement (Social Force Model)
+
+At each timestep the net force on agent *i* is:
+
+```
+f = (v_desired − v_current) / τ   ← acceleration toward waypoint
+  + Σ A·exp((ri+rj−dij)/B) · n̂   ← repulsion from nearby agents
+  + Σ A_wall·exp((ri−d_wall)/B_wall) · n̂_wall  ← repulsion from walls
+```
+
+Constants: τ = 0.5 s, A = 2 m/s², B = 0.15 m (agent); A_wall = 3, B_wall = 0.1 m (walls).
+
+### Path Planning (A*)
+
+A coarse 1 m grid is built from the wall layout. When an agent is assigned a target, A* finds the shortest passable path. The agent then follows the resulting waypoints using local steering. Paths are recomputed if the agent gets stuck (velocity < 0.05 m/s for 2.5 s).
+
+### Density Heatmap
+
+The venue is divided into cells of configurable size (default 1 m²). Each tick the density in each cell is computed as agent count / cell area (pers/m²). The heatmap is rendered with a green → orange → red colour scale.
+
+### Bottleneck Detection
+
+Cells at or above the *danger* threshold are highlighted with a red border on the canvas.
+
+### Performance
+
+A **uniform spatial hash** (cell size = 2 × personal space) reduces the neighbour search from O(N²) to approximately O(N). At 2 000 agents the engine runs at 60 fps on a modern laptop.
+
+### Safety Estimator
+
+The estimator runs abbreviated simulations (larger timestep, shorter duration) for N ∈ [sweepMinN, sweepMaxN] in steps of *sweepStep*. It finds the highest N where **all three** criteria are met:
+
+1. Peak density ≤ danger threshold
+2. P95 egress time ≤ limit (default 8 min)
+3. % sim-time above warning ≤ limit (default 5%)
 
 ---
 
 ## Project Structure
 
 ```
-agentic_hackathon/
-├── configs/
-│   └── agents.yaml          # ALL simulation configuration lives here
-├── simulation/
-│   ├── model.py             # Environment physics and rules
-│   ├── agent.py             # LLM agent inputs, prompts, and decision loop
-│   ├── tools.py             # Actions agents can take (speak)
-│   ├── visualization.py     # Matplotlib animation playback
-│   └── run.py               # Entry point
-└── .env                     # API keys (never commit this)
+src/
+├── models/
+│   └── types.ts          — all TypeScript interfaces and enums
+├── sim/
+│   └── engine.ts         — SimEngine class + runSweep()
+├── ui/
+│   ├── VenueEditor.tsx   — canvas-based venue designer
+│   ├── SimCanvas.tsx     — simulation renderer (heatmap, agents)
+│   ├── SimControls.tsx   — all parameter sliders/inputs
+│   ├── MetricsPanel.tsx  — live KPI display
+│   └── SafetyEstimator.tsx — automated N sweep + chart
+└── utils/
+    ├── math.ts           — Vec2 helpers, Gaussian, closest-point
+    ├── spatialHash.ts    — uniform grid spatial index
+    ├── astar.ts          — grid A* + passable-grid builder
+    └── export.ts         — JSON / CSV download helpers
 ```
 
 ---
 
-## File-by-File Breakdown
+## Known Limitations & How to Extend
 
----
-
-### `configs/agents.yaml` — The Control Panel
-
-**This is the only file you need to edit for most experiments.**
-
-```yaml
-environment:
-  width: 10          # grid width  (x: 0 to width-1)
-  height: 10         # grid height (y: 0 to height-1)
-  deadline: 10       # max steps before simulation force-stops
-  llm_model: "openai/gpt-4o-mini"   # any litellm-compatible model string
-  door: [9, 5]       # (x, y) position of the exit door
-
-agents:
-  - name: "Alice"
-    role: "domain expert"
-    personality: "Analytical, skeptical, and data-driven."
-    position: [2, 3]     # starting (x, y) on the grid
-    vision_radius: 2     # how many cells away the agent can see
-```
-
-**What each field controls:**
-| Field | Effect |
-|---|---|
-| `width` / `height` | Grid size. Agents cannot move outside these bounds. |
-| `deadline` | Hard cutoff. Simulation stops after this many steps even if agents haven't exited. |
-| `llm_model` | The LLM powering all agents. Uses [litellm](https://docs.litellm.ai/) format: `provider/model`. |
-| `door` | The single exit tile. Agents are removed when they land on it. |
-| `name` | Agent's name, shown in the visualization and injected into their system prompt. |
-| `role` | Injected into system prompt. Shapes how the agent frames decisions. |
-| `personality` | Injected into system prompt. Defines communication style and priorities. |
-| `position` | Starting cell on the grid. |
-| `vision_radius` | Observation radius. An agent only sees other agents within this many cells (Moore neighborhood). |
-
----
-
-### `simulation/model.py` — Environment Physics
-
-**`EvaluationModel`** is the "world." It owns the grid, enforces the physics, and orchestrates time.
-
-**What it controls:**
-- **The grid** — a `MultiGrid` (multiple agents can share a cell). Grid coordinates are `(x, y)`, origin bottom-left.
-- **The step loop** — each call to `model.step()` advances time by one tick. All agents act in a random shuffled order each tick.
-- **The door rule** — after all agents have acted, `_check_door_exits()` scans for any agent standing on `door_position`. Those agents are removed from the grid and deregistered from the model entirely.
-- **Termination** — the simulation stops when either (a) the deadline is reached or (b) no agents remain on the grid.
-- **Position history** — after every step, records each agent's position (or `"exited"`) for the visualization replay.
-
-**To change physics**, edit this file:
-- Change the movement rules → override what happens in `_check_door_exits` or add new exit conditions.
-- Add obstacles → check agent positions against a set of blocked cells inside `step()`.
-- Add multiple doors → change `door_position` to a list and update `_check_door_exits`.
-- Add time pressure → shorten `deadline` or add a shrinking safe zone.
-
----
-
-### `simulation/agent.py` — LLM Agent Inputs & Decision Loop
-
-**`HumanLLMAgent`** is what each simulated human actually is. It wires together three inputs that the LLM sees every turn, and defines what happens at each step.
-
-#### The three inputs to the LLM each turn:
-
-**1. `system_prompt` — who the agent is (set once at startup)**
-```
-You are {name}, a human participant in a group simulation.
-Your role: {role}.
-Your personality: {personality}.
-
-Available tools:
-- move_one_step(direction): move in one of 8 directions
-- speak_nearby(message): say something to nearby agents
-```
-This is the agent's identity. It never changes during the simulation.
-
-**2. `step_prompt` — what the agent is trying to do (set once at startup)**
-```
-The exit door is at position (9, 5).
-Your goal is to reach the door and leave the room.
-Move toward the door each turn.
-You may also speak to nearby participants as you move.
-```
-This is the agent's objective. Change this to change the simulation goal entirely — e.g., "Find the agent named Bob and deliver a message" or "Stay as far from other agents as possible."
-
-**3. Observation — what the agent currently sees (generated fresh each step)**
-
-Built automatically by `generate_obs()`, which collects:
-- The agent's own current position
-- All other agents within `vision_radius` cells, with their positions
-
-This is injected into the CoT reasoning prompt alongside the agent's memory.
-
-#### The step loop (runs every tick):
-```python
-def step(self):
-    obs = self.generate_obs()          # build spatial observation
-    plan = self.reasoning.plan(obs=obs) # CoT: think → decide → pick tools
-    self.apply_plan(plan)              # execute the chosen tool calls
-```
-
-The **CoT (Chain-of-Thought) reasoning** makes the LLM:
-1. Write explicit `Thought 1…4` reasoning steps
-2. State an `Action`
-3. Then call tools to actually execute it
-
-**Memory** (`STLTMemory`) stores past observations, plans, and messages. Short-term holds the last 5 steps; long-term is a compressed LLM summary. Both feed into the next step's reasoning.
-
-**To change agent behavior**, edit this file:
-- Change the goal → edit `step_prompt`.
-- Change the persona → edit how `system_prompt` is built from `role` and `personality`.
-- Change the reasoning style → swap `CoTReasoning` for `ReActReasoning` or `ReWOOReasoning`.
-- Add more context → extend `internal_state` with custom fields visible to the LLM.
-
----
-
-### `simulation/tools.py` — Actions Agents Can Take
-
-Tools are the only way agents affect the world. Each tool is a Python function decorated with `@tool`. Mesa-LLM auto-generates the OpenAI function-calling schema from the docstring and type hints, then injects the `agent` argument automatically at call time.
-
-**Currently registered tools:**
-
-| Tool | Defined in | What it does |
-|---|---|---|
-| `move_one_step(direction)` | `mesa_llm.tools.inbuilt_tools` | Moves agent one cell in a cardinal/diagonal direction. Bounded by grid edges. |
-| `speak_nearby(message)` | `simulation/tools.py` | Broadcasts a message to all agents within `vision_radius`. Messages are written directly into recipients' memory. |
-| `teleport_to_location(target_coordinates)` | `mesa_llm.tools.inbuilt_tools` | Teleports agent to any `[x, y]` cell. (Available to LLM but not advertised in system prompt.) |
-
-**To add a new action** (e.g., `pick_up_item`, `wait`, `signal`):
-1. Write a function in `tools.py` with a full Google-style `Args:` docstring
-2. Decorate it with `@tool`
-3. Mention it in the agent's `system_prompt` so the LLM knows it exists
-
----
-
-### `simulation/visualization.py` — Animation Playback
-
-Runs **after** the simulation completes. Reads `model.position_history` (a list of per-step snapshots) and renders a `FuncAnimation` that loops through the steps.
-
-- Each agent is a colored circle with their initial letter
-- The exit door is a yellow "EXIT" tile (static)
-- Exited agents disappear from the grid
-- The title shows current step and agents remaining
-
-**To customize visuals**, edit `_COLORS`, the `FancyBboxPatch` for the door, or `interval_ms` for playback speed.
-
----
-
-### `simulation/run.py` — Entry Point
-
-Reads `configs/agents.yaml`, instantiates `EvaluationModel`, runs the simulation loop, prints each agent's final memory transcript, then opens the visualization window.
-
-Nothing simulation-logic lives here — it's purely orchestration.
-
----
-
-## How a Single Step Works End-to-End
-
-```
-model.step()
-  └── for each agent (random order):
-        agent.step()
-          ├── generate_obs()          → spatial snapshot of nearby agents
-          ├── reasoning.plan(obs)     → CoT LLM call → picks tool calls
-          └── apply_plan(plan)        → executes move_one_step / speak_nearby
-  └── _check_door_exits()             → remove agents on door tile
-  └── record position_history[step]
-```
-
----
-
-## Extending the Simulation
-
-| Want to... | Edit |
-|---|---|
-| Change grid size or deadline | `configs/agents.yaml` → `environment` |
-| Add / remove agents | `configs/agents.yaml` → `agents` list |
-| Change what agents are trying to do | `simulation/agent.py` → `step_prompt` |
-| Change agent identity / persona | `configs/agents.yaml` → `role`, `personality` |
-| Add a new action (tool) | `simulation/tools.py` |
-| Add obstacles or new physics | `simulation/model.py` → `step()` |
-| Change the LLM model | `configs/agents.yaml` → `llm_model` |
-| Change reasoning strategy | `simulation/agent.py` → swap `CoTReasoning` |
-| Customize the animation | `simulation/visualization.py` |
+| Limitation | How to fix |
+|-----------|-----------|
+| **A* is recomputed per-agent** | Cache paths keyed on (start-cell, goal-cell); use a navigation mesh |
+| **Single-threaded** | Move engine.tick() into a Web Worker with a shared-memory buffer |
+| **No fire/smoke spread** | Add a diffusion layer that marks cells impassable over time |
+| **Simple queue model** | Implement multi-server queuing (M/G/c) at each attractor |
+| **Social force constants are fixed** | Expose τ, A, B as sliders; or fit them to empirical pedestrian data |
+| **No vertical flow** | Add stairs/escalators modelled as speed-reduction zones |
+| **Sweep blocks the UI** | Offload runSweep() to a Web Worker or use async chunking |
+| **agentById is O(N)** | Replace `agents.find()` with a `Map<id, Agent>` for O(1) lookup |

@@ -12,6 +12,8 @@ interface Props {
   onFireClick?: (wx: number, wy: number) => void;
 }
 
+const SCALE = 10; // pixels per metre
+
 // Heatmap colour: cool → warm
 function heatColor(density: number, danger: number): string {
   const t = Math.min(1, density / danger);
@@ -51,10 +53,8 @@ export default function SimCanvas({ frame, layout, config, showHeatmap, showAgen
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d')!;
-    const parentWidth = canvas.parentElement?.clientWidth ?? 900;
-    const scale = Math.max(12, parentWidth / Math.max(layout.width, 1));
-    const W = layout.width * scale;
-    const H = layout.height * scale;
+    const W = layout.width  * SCALE;
+    const H = layout.height * SCALE;
     const dpr = window.devicePixelRatio || 1;
 
     if (canvas.width !== W * dpr || canvas.height !== H * dpr) {
@@ -71,7 +71,7 @@ export default function SimCanvas({ frame, layout, config, showHeatmap, showAgen
 
     // ── Heatmap ─────────────────────────────────────────────────────────────
     if (showHeatmap && frame.densityGrid.length > 0) {
-      const cs = config.cellSize * scale;
+      const cs = config.cellSize * SCALE;
       for (let r = 0; r < frame.gridRows; r++) {
         for (let c = 0; c < frame.gridCols; c++) {
           const d = frame.densityGrid[r][c];
@@ -84,7 +84,7 @@ export default function SimCanvas({ frame, layout, config, showHeatmap, showAgen
 
     // ── Bottleneck highlight ─────────────────────────────────────────────────
     if (showBottlenecks && frame.densityGrid.length > 0) {
-      const cs = config.cellSize * scale;
+      const cs = config.cellSize * SCALE;
       for (let r = 0; r < frame.gridRows; r++) {
         for (let c = 0; c < frame.gridCols; c++) {
           if (frame.densityGrid[r][c] >= config.densityDanger) {
@@ -128,44 +128,44 @@ export default function SimCanvas({ frame, layout, config, showHeatmap, showAgen
     ctx.strokeStyle = '#4b5563';
     ctx.lineWidth   = 1;
     for (const w of layout.walls) {
-      ctx.fillRect(w.rect.x * scale, w.rect.y * scale, w.rect.w * scale, w.rect.h * scale);
-      ctx.strokeRect(w.rect.x * scale, w.rect.y * scale, w.rect.w * scale, w.rect.h * scale);
+      ctx.fillRect(w.rect.x * SCALE, w.rect.y * SCALE, w.rect.w * SCALE, w.rect.h * SCALE);
+      ctx.strokeRect(w.rect.x * SCALE, w.rect.y * SCALE, w.rect.w * SCALE, w.rect.h * SCALE);
     }
 
     // ── Entrances ────────────────────────────────────────────────────────────
     for (const en of layout.entrances) {
       ctx.fillStyle = '#22c55e';
-      ctx.fillRect((en.x - en.width / 2) * scale, (en.y - 0.5) * scale, en.width * scale, 1 * scale);
+      ctx.fillRect((en.x - en.width / 2) * SCALE, (en.y - 0.5) * SCALE, en.width * SCALE, 1 * SCALE);
       ctx.fillStyle = '#fff';
       ctx.font = '10px monospace';
       ctx.textAlign = 'center';
-      ctx.fillText('IN', en.x * scale, (en.y + 0.1) * scale);
+      ctx.fillText('IN', en.x * SCALE, (en.y + 0.1) * SCALE);
     }
 
     // ── Exits ────────────────────────────────────────────────────────────────
     for (const ex of layout.exits) {
       const blocked = frame.blockedExits?.includes(ex.id) ?? false;
-      const ex1 = (ex.x - ex.width / 2) * scale;
-      const ey1 = (ex.y - 0.5) * scale;
-      const ew  = ex.width * scale;
+      const ex1 = (ex.x - ex.width / 2) * SCALE;
+      const ey1 = (ex.y - 0.5) * SCALE;
+      const ew  = ex.width * SCALE;
       ctx.fillStyle = blocked ? '#1f2937' : '#ef4444';
-      ctx.fillRect(ex1, ey1, ew, scale);
+      ctx.fillRect(ex1, ey1, ew, SCALE);
       if (blocked) {
         ctx.strokeStyle = '#ef4444';
         ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(ex1, ey1);       ctx.lineTo(ex1 + ew, ey1 + scale); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(ex1 + ew, ey1);  ctx.lineTo(ex1, ey1 + scale);      ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ex1, ey1);         ctx.lineTo(ex1 + ew, ey1 + SCALE); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ex1 + ew, ey1);   ctx.lineTo(ex1, ey1 + SCALE);      ctx.stroke();
       }
       ctx.fillStyle = blocked ? '#f87171' : '#fff';
       ctx.font = '10px monospace';
       ctx.textAlign = 'center';
-      ctx.fillText(blocked ? 'CLOSED' : 'EXIT', ex.x * scale, (ex.y + 0.1) * scale);
+      ctx.fillText(blocked ? 'CLOSED' : 'EXIT', ex.x * SCALE, (ex.y + 0.1) * SCALE);
     }
 
     // ── Attractors ───────────────────────────────────────────────────────────
     for (const att of layout.attractors) {
       ctx.beginPath();
-      ctx.arc(att.x * scale, att.y * scale, att.radius * scale, 0, Math.PI * 2);
+      ctx.arc(att.x * SCALE, att.y * SCALE, att.radius * SCALE, 0, Math.PI * 2);
       ctx.fillStyle   = 'rgba(245,158,11,0.15)';
       ctx.strokeStyle = '#f59e0b';
       ctx.lineWidth   = 1.5;
@@ -174,7 +174,7 @@ export default function SimCanvas({ frame, layout, config, showHeatmap, showAgen
       ctx.fillStyle = '#fcd34d';
       ctx.font = '11px monospace';
       ctx.textAlign = 'center';
-      ctx.fillText(att.label, att.x * scale, att.y * scale + 4);
+      ctx.fillText(att.label, att.x * SCALE, att.y * SCALE + 4);
     }
 
     // ── Agents ───────────────────────────────────────────────────────────────
@@ -182,7 +182,7 @@ export default function SimCanvas({ frame, layout, config, showHeatmap, showAgen
       for (const a of frame.agents) {
         const color = STATE_COLOR[a.state] ?? '#ccc';
         ctx.beginPath();
-        ctx.arc(a.x * scale, a.y * scale, Math.max(1.5, a.radius * scale), 0, Math.PI * 2);
+        ctx.arc(a.x * SCALE, a.y * SCALE, Math.max(1.5, a.radius * SCALE), 0, Math.PI * 2);
         ctx.fillStyle = color;
         ctx.fill();
       }
@@ -192,7 +192,7 @@ export default function SimCanvas({ frame, layout, config, showHeatmap, showAgen
     if (frame.firefighters && frame.fireCols) {
       const cs = W / frame.fireCols;
       for (const ff of frame.firefighters) {
-        const px = ff.x * scale, py = ff.y * scale;
+        const px = ff.x * SCALE, py = ff.y * SCALE;
 
         // Water hose beam while extinguishing
         if (ff.extinguishing && ff.targetRow !== undefined && ff.targetCol !== undefined) {
@@ -244,8 +244,8 @@ export default function SimCanvas({ frame, layout, config, showHeatmap, showAgen
           }
         }
         if (!near) continue;
-        const px = a.x * scale;
-        const py = (a.y - a.radius) * scale - 3;
+        const px = a.x * SCALE;
+        const py = (a.y - a.radius) * SCALE - 3;
         ctx.fillStyle = 'rgba(0,0,0,0.7)';
         ctx.fillRect(px - 13, py - 9, 26, 11);
         ctx.fillStyle = '#fca5a5';

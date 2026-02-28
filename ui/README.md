@@ -5,12 +5,18 @@ A browser-based, agent-driven crowd simulation for estimating maximum safe capac
 ## Quick Start
 
 ```bash
-cd simulation
+cd ui
 npm install
 npm run dev
 ```
 
 Then open http://localhost:5173 in your browser.
+
+If you want backend integration features (API health + backend run button), run the Python API too:
+
+```bash
+poetry run uvicorn backend_api:app --reload --port 8000
+```
 
 ---
 

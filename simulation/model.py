@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import asyncio
-
 from mesa import Model
 from mesa.space import MultiGrid
 
@@ -66,10 +64,9 @@ class EvaluationModel(Model):
 
         print(f"\n=== Step {self.current_step + 1} / {self.deadline} ===")
 
-        async def _run_parallel():
-            await asyncio.gather(*[a.astep() for a in self.agents])
-
-        asyncio.run(_run_parallel())
+        # Run agents sequentially for compatibility across mesa-llm versions.
+        for agent in list(self.agents):
+            agent.step()
         self._check_door_exits()
         self.current_step += 1
 

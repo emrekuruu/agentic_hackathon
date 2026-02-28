@@ -1,0 +1,35 @@
+{
+  "width": 70,
+  "height": 50,
+  "walls": [
+    { "id": "stage-left",   "rect": { "x": 12, "y": 0,  "w": 2,  "h": 10 } },
+    { "id": "stage-right",  "rect": { "x": 56, "y": 0,  "w": 2,  "h": 10 } },
+    { "id": "sound-desk",   "rect": { "x": 32, "y": 18, "w": 6,  "h": 3  } },
+    { "id": "pillar-left",  "rect": { "x": 20, "y": 24, "w": 2,  "h": 6  } },
+    { "id": "pillar-right", "rect": { "x": 48, "y": 24, "w": 2,  "h": 6  } },
+    { "id": "bar-left",     "rect": { "x": 4,  "y": 32, "w": 7,  "h": 2  } },
+    { "id": "bar-right",    "rect": { "x": 59, "y": 32, "w": 7,  "h": 2  } },
+    { "id": "merch",        "rect": { "x": 26, "y": 40, "w": 18, "h": 2  } },
+    { "id": "wc-left",      "rect": { "x": 2,  "y": 42, "w": 5,  "h": 4  } },
+    { "id": "wc-right",     "rect": { "x": 63, "y": 42, "w": 5,  "h": 4  } }
+  ],
+  "entrances": [
+    { "id": "en1", "x": 20,   "y": 0.5, "width": 5 },
+    { "id": "en2", "x": 50,   "y": 0.5, "width": 5 }
+  ],
+  "exits": [
+    { "id": "ex1", "x": 8,    "y": 49.5, "width": 7,  "capacity": 4 },
+    { "id": "ex2", "x": 35,   "y": 49.5, "width": 10, "capacity": 5 },
+    { "id": "ex3", "x": 62,   "y": 49.5, "width": 7,  "capacity": 4 },
+    { "id": "ex4", "x": 0.5,  "y": 28,   "width": 4,  "capacity": 3 },
+    { "id": "ex5", "x": 69.5, "y": 28,   "width": 4,  "capacity": 3 }
+  ],
+  "attractors": [
+    { "id": "att1", "x": 35,   "y": 5,  "radius": 10, "weight": 1.0, "label": "Stage", "serviceTime": 300, "queueEnabled": false, "queueCapacity": 500 },
+    { "id": "att2", "x": 7.5,  "y": 36, "radius": 3,  "weight": 0.5, "label": "Bar",   "serviceTime": 60,  "queueEnabled": true,  "queueCapacity": 15  },
+    { "id": "att3", "x": 62.5, "y": 36, "radius": 3,  "weight": 0.5, "label": "Bar",   "serviceTime": 60,  "queueEnabled": true,  "queueCapacity": 15  },
+    { "id": "att4", "x": 35,   "y": 44, "radius": 5,  "weight": 0.3, "label": "Merch", "serviceTime": 90,  "queueEnabled": true,  "queueCapacity": 25  },
+    { "id": "att5", "x": 8,    "y": 44, "radius": 2,  "weight": 0.2, "label": "WC",    "serviceTime": 120, "queueEnabled": true,  "queueCapacity": 8   },
+    { "id": "att6", "x": 62,   "y": 44, "radius": 2,  "weight": 0.2, "label": "WC",    "serviceTime": 120, "queueEnabled": true,  "queueCapacity": 8   }
+  ]
+}

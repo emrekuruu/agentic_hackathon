@@ -1,43 +1,18 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { VenueLayout, SimConfig, SimFrame, Metrics, Scenario, SweepResult } from './models/types';
-import { SimEngine } from './sim/engine';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { VenueLayout, SimConfig, SimFrame, Metrics, AgentState } from './models/types';
 import VenueEditor from './ui/VenueEditor';
 import SimCanvas from './ui/SimCanvas';
-import SimControls from './ui/SimControls';
 import MetricsPanel from './ui/MetricsPanel';
-import SafetyEstimator from './ui/SafetyEstimator';
-import ScenarioManager from './ui/ScenarioManager';
-import { exportResultsJSON, exportResultsCSV, exportVenueJSON, loadVenueJSON } from './utils/export';
+import { getBackendHealth, runDefaultBackendSimulation, getDefaultBackendConfig, BackendSimSummary } from './utils/backend';
 
 // ─── Sample venue ─────────────────────────────────────────────────────────────
 const SAMPLE_VENUE: VenueLayout = {
-  width: 60,
-  height: 40,
-  walls: [
-    { id: 'w1', rect: { x: 10, y: 0,  w: 2, h: 15 } },   // left divider
-    { id: 'w2', rect: { x: 10, y: 25, w: 2, h: 15 } },
-    { id: 'w3', rect: { x: 48, y: 0,  w: 2, h: 15 } },   // right divider
-    { id: 'w4', rect: { x: 48, y: 25, w: 2, h: 15 } },
-    { id: 'w5', rect: { x: 18, y: 12, w: 24, h: 1.5 } }, // inner barrier
-    { id: 'w6', rect: { x: 20, y: 30, w: 5,  h: 5 } },   // obstacle 1
-    { id: 'w7', rect: { x: 35, y: 30, w: 5,  h: 5 } },   // obstacle 2
-  ],
-  entrances: [
-    { id: 'en1', x: 5,  y: 0.5,  width: 4 },
-    { id: 'en2', x: 55, y: 0.5,  width: 4 },
-  ],
-  exits: [
-    { id: 'ex1', x: 5,  y: 39.5, width: 4, capacity: 3 },
-    { id: 'ex2', x: 30, y: 39.5, width: 6, capacity: 4 },
-    { id: 'ex3', x: 55, y: 39.5, width: 4, capacity: 3 },
-  ],
-  attractors: [
-    { id: 'att1', x: 30, y: 8,  radius: 4, weight: 1.0, label: 'Stage',  serviceTime: 120, queueEnabled: false, queueCapacity: 100 },
-    { id: 'att2', x: 8,  y: 22, radius: 3, weight: 0.6, label: 'Bar',    serviceTime: 60,  queueEnabled: true,  queueCapacity: 15 },
-    { id: 'att3', x: 52, y: 22, radius: 3, weight: 0.6, label: 'Bar',    serviceTime: 60,  queueEnabled: true,  queueCapacity: 15 },
-    { id: 'att4', x: 8,  y: 35, radius: 2, weight: 0.3, label: 'WC',     serviceTime: 120, queueEnabled: true,  queueCapacity: 8  },
-    { id: 'att5', x: 52, y: 35, radius: 2, weight: 0.3, label: 'WC',     serviceTime: 120, queueEnabled: true,  queueCapacity: 8  },
-  ],
+  width: 10,
+  height: 10,
+  walls: [],
+  entrances: [],
+  exits: [{ id: 'exit-main', x: 9.5, y: 5.5, width: 1, capacity: 100 }],
+  attractors: [],
 };
 
 const DEFAULT_CONFIG: SimConfig = {
@@ -77,184 +52,143 @@ const EMPTY_FRAME: SimFrame = {
 };
 
 type Tab = 'editor' | 'simulation' | 'estimator' | 'scenarios';
+type BackendStatus = 'checking' | 'online' | 'offline';
+
+function mapBackendVenue(width: number, height: number, door: [number, number], obstacles: [number, number][]): VenueLayout {
+  return {
+    width,
+    height,
+    walls: obstacles.map((o, i) => ({ id: `obs-${i}`, rect: { x: o[0], y: o[1], w: 1, h: 1 } })),
+    entrances: [],
+    exits: [{ id: 'exit-main', x: door[0] + 0.5, y: door[1] + 0.5, width: 1, capacity: 100 }],
+    attractors: [],
+  };
+}
+
+function buildFrameFromBackend(
+  run: BackendSimSummary,
+  stepIndex: number,
+  isRunning: boolean,
+): SimFrame {
+  const boundedStep = Math.max(0, Math.min(stepIndex, run.position_history.length - 1));
+  const framePositions = run.position_history[boundedStep] ?? {};
+  const agentNames = Object.keys(run.position_history[0] ?? framePositions);
+
+  let activeAgents = 0;
+  const agents = agentNames.flatMap((name, idx) => {
+    const pos = framePositions[name];
+    if (!pos || pos === 'exited') return [];
+    activeAgents += 1;
+    return [{
+      id: idx,
+      x: pos[0] + 0.5,
+      y: pos[1] + 0.5,
+      vx: 0,
+      vy: 0,
+      radius: 0.28,
+      state: 'seeking_exit' as AgentState,
+    }];
+  });
+
+  const exitedAgents = run.total_agents - activeAgents;
+
+  return {
+    agents,
+    densityGrid: [],
+    gridCols: 0,
+    gridRows: 0,
+    metrics: {
+      ...EMPTY_METRICS,
+      simTime: boundedStep,
+      activeAgents,
+      exitedAgents,
+    },
+    simTime: boundedStep,
+    isRunning,
+    isEvacuating: false,
+  };
+}
 
 export default function App() {
-  const [tab, setTab]           = useState<Tab>('simulation');
-  const [layout, setLayout]     = useState<VenueLayout>(SAMPLE_VENUE);
-  const [config, setConfig]     = useState<SimConfig>(DEFAULT_CONFIG);
-  const [frame, setFrame]       = useState<SimFrame>(EMPTY_FRAME);
-  const [showHeatmap, setHeatmap]         = useState(true);
-  const [showAgents, setAgents]           = useState(true);
-  const [showBottlenecks, setBottlenecks] = useState(true);
-  const [fireMode, setFireMode]           = useState(false);
-  const [blockedExits, setBlockedExits]   = useState<Set<string>>(new Set());
-  const [scenarios, setScenarios]         = useState<Scenario[]>([]);
+  const [tab, setTab] = useState<Tab>('simulation');
+  const [layout, setLayout] = useState<VenueLayout>(SAMPLE_VENUE);
+  const [config, setConfig] = useState<SimConfig>(DEFAULT_CONFIG);
+  const [frame, setFrame] = useState<SimFrame>(EMPTY_FRAME);
+  const [showHeatmap, setHeatmap] = useState(true);
+  const [showAgents, setAgents] = useState(true);
+  const [showBottlenecks, setBottlenecks] = useState(false);
+  const [backendStatus, setBackendStatus] = useState<BackendStatus>('checking');
+  const [backendSummary, setBackendSummary] = useState<BackendSimSummary | null>(null);
+  const [backendError, setBackendError] = useState<string | null>(null);
+  const [backendLoading, setBackendLoading] = useState(false);
+  const [playbackStep, setPlaybackStep] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const engineRef   = useRef<SimEngine | null>(null);
-  const rafRef      = useRef<number>(0);
-  const lastTime    = useRef<number>(0);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const alarmRef    = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const startAlarm = useCallback(() => {
-    if (audioCtxRef.current) return; // already ringing
-    const ctx = new AudioContext();
-    audioCtxRef.current = ctx;
-    let phase = 0;
-    const beep = () => {
-      const osc  = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = 'square';
-      osc.frequency.value = phase ? 960 : 820;
-      gain.gain.setValueAtTime(0.12, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.38);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.4);
-      phase ^= 1;
-    };
-    beep();
-    alarmRef.current = setInterval(beep, 500);
+  useEffect(() => {
+    getBackendHealth()
+      .then(() => setBackendStatus('online'))
+      .catch(() => setBackendStatus('offline'));
+    getDefaultBackendConfig()
+      .then((cfg) => {
+        setLayout(mapBackendVenue(cfg.environment.width, cfg.environment.height, cfg.environment.door, cfg.environment.obstacles));
+      })
+      .catch(() => {
+        // Keep sample venue if backend config is unavailable.
+      });
   }, []);
 
-  const stopAlarm = useCallback(() => {
-    if (alarmRef.current) { clearInterval(alarmRef.current); alarmRef.current = null; }
-    audioCtxRef.current?.close();
-    audioCtxRef.current = null;
-  }, []);
-
-  // Init engine
   useEffect(() => {
-    const eng = new SimEngine(layout, config);
-    eng.reset();
-    engineRef.current = eng;
-    setFrame(eng.getFrame());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!backendSummary) return;
+    setFrame(buildFrameFromBackend(backendSummary, playbackStep, playing));
+  }, [backendSummary, playbackStep, playing]);
 
-  // Stop alarm when fire is fully extinguished
   useEffect(() => {
-    const hasFire = frame.fireGrid?.some(row => row.includes(true));
-    if (!hasFire && audioCtxRef.current) stopAlarm();
-  }, [frame.fireGrid, stopAlarm]);
-
-  // RAF loop
-  useEffect(() => {
-    const loop = (ts: number) => {
-      const dt = lastTime.current ? Math.min((ts - lastTime.current) / 1000, 0.05) : 0;
-      lastTime.current = ts;
-
-      const eng = engineRef.current;
-      if (eng?.running) {
-        eng.tick(dt);
-        setFrame(eng.getFrame());
+    if (!playing || !backendSummary) return;
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setPlaybackStep((prev) => {
+        const next = prev + 1;
+        if (next >= backendSummary.position_history.length) {
+          setPlaying(false);
+          return prev;
+        }
+        return next;
+      });
+    }, 450);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
-      rafRef.current = requestAnimationFrame(loop);
     };
-    rafRef.current = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, []);
+  }, [playing, backendSummary]);
 
-  const syncEngineConfig = useCallback((cfg: SimConfig) => {
-    setConfig(cfg);
-    engineRef.current?.updateConfig(cfg);
-  }, []);
-
-  const syncLayout = useCallback((l: VenueLayout) => {
-    setLayout(l);
-    engineRef.current?.updateLayout(l);
-  }, []);
-
-  const handleRun = () => {
-    if (!engineRef.current) return;
-    engineRef.current.start();
-    setFrame(engineRef.current.getFrame());
-  };
-
-  const handlePause = () => {
-    engineRef.current?.pause();
-    setFrame(engineRef.current!.getFrame());
-  };
-
-  const handleStep = () => {
-    if (!engineRef.current) return;
-    engineRef.current.tick(0.1);
-    setFrame(engineRef.current.getFrame());
-  };
-
-  const handleFireClick = useCallback((wx: number, wy: number) => {
-    engineRef.current?.startFire(wx, wy);
-    startAlarm();
-  }, [startAlarm]);
-
-  const toggleExit = useCallback((id: string) => {
-    setBlockedExits(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id); else next.add(id);
-      engineRef.current?.setBlockedExits(next);
-      return next;
-    });
-  }, []);
-
-  // ── Scenario handlers ───────────────────────────────────────────────────────
-  const handleSaveScenario = useCallback((name: string) => {
-    const newScenario: Scenario = {
-      id: `sc-${Date.now()}`,
-      name,
-      layout: layout,
-      sweepResults: [],
-      ranAt: null,
-    };
-    setScenarios(prev => [...prev, newScenario]);
-  }, [layout]);
-
-  const handleLoadScenario = useCallback((id: string) => {
-    const sc = scenarios.find(s => s.id === id);
-    if (!sc) return;
-    syncLayout(sc.layout);
-    setTab('simulation');
-  }, [scenarios, syncLayout]);
-
-  const handleDeleteScenario = useCallback((id: string) => {
-    setScenarios(prev => prev.filter(s => s.id !== id));
-  }, []);
-
-  const handleUpdateScenarioResults = useCallback((id: string, results: SweepResult[]) => {
-    setScenarios(prev => prev.map(s =>
-      s.id === id ? { ...s, sweepResults: results, ranAt: new Date().toISOString() } : s
-    ));
-  }, []);
-
-  const handleReset = () => {
-    if (!engineRef.current) return;
-    stopAlarm();
-    setBlockedExits(new Set());
-    engineRef.current.pause();
-    engineRef.current.reset();
-    engineRef.current.start();
-    lastTime.current = 0;
-    setFrame(engineRef.current.getFrame());
-  };
-
-  const handleLoadSample = () => {
-    syncLayout(SAMPLE_VENUE);
-    if (engineRef.current) {
-      engineRef.current.updateLayout(SAMPLE_VENUE);
-      engineRef.current.reset();
-      setFrame(engineRef.current.getFrame());
+  const handleRunBackendDefault = async () => {
+    try {
+      setBackendLoading(true);
+      setBackendError(null);
+      const [cfg, summary] = await Promise.all([
+        getDefaultBackendConfig(),
+        runDefaultBackendSimulation(),
+      ]);
+      setLayout(mapBackendVenue(cfg.environment.width, cfg.environment.height, cfg.environment.door, cfg.environment.obstacles));
+      setBackendSummary(summary);
+      setPlaybackStep(0);
+      setPlaying(summary.position_history.length > 0);
+      setBackendStatus('online');
+    } catch (err) {
+      setBackendStatus('offline');
+      setBackendSummary(null);
+      setBackendError(err instanceof Error ? err.message : 'Backend simulation failed.');
+    } finally {
+      setBackendLoading(false);
     }
   };
 
-  const handleLoadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    try {
-      const loaded = await loadVenueJSON(file);
-      syncLayout(loaded);
-    } catch { alert('Failed to load venue file.'); }
-    e.target.value = '';
-  };
+  const totalFrames = backendSummary?.position_history.length ?? 0;
+  const canStep = useMemo(() => totalFrames > 0 && playbackStep < totalFrames - 1, [totalFrames, playbackStep]);
+  const canBack = useMemo(() => totalFrames > 0 && playbackStep > 0, [totalFrames, playbackStep]);
 
   return (
     <div style={{
@@ -270,29 +204,35 @@ export default function App() {
           🏟 CrowdFlow Simulator
         </div>
         <div style={{ display: 'flex', gap: 4, marginLeft: 16 }}>
-          {(['editor', 'simulation', 'estimator', 'scenarios'] as Tab[]).map(t => (
+          {(['simulation', 'editor'] as Tab[]).map(t => (
             <button key={t} onClick={() => setTab(t)} style={{
               padding: '4px 14px', borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: 'pointer',
               background: tab === t ? '#1d4ed8' : 'transparent',
               color: tab === t ? '#fff' : '#9ca3af',
               border: tab === t ? '1px solid #3b82f6' : '1px solid transparent',
             }}>
-              {t === 'editor' ? '✏ Venue Editor'
-                : t === 'simulation' ? '▶ Simulation'
-                : t === 'estimator' ? '🔍 Safety Estimator'
-                : <>📐 Scenarios {scenarios.length > 0 && <span style={{ background: '#3b82f6', color: '#fff', borderRadius: 8, padding: '0 5px', fontSize: 10 }}>{scenarios.length}</span>}</>}
+              {t === 'editor' ? '✏ Venue Visuals' : '▶ Backend Simulation'}
             </button>
           ))}
         </div>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center' }}>
-          <button onClick={handleLoadSample} style={headerBtn('#7c3aed')}>Load Sample</button>
-          <label style={{ ...headerBtn('#374151') as React.CSSProperties, cursor: 'pointer' }}>
-            Upload Venue
-            <input type="file" accept=".json" onChange={handleLoadFile} style={{ display: 'none' }} />
-          </label>
-          <button onClick={() => exportVenueJSON(layout)} style={headerBtn('#374151')}>Save Venue</button>
-          <button onClick={() => exportResultsJSON(frame.metrics, config, layout, [])} style={headerBtn('#374151')}>Export JSON</button>
-          <button onClick={() => exportResultsCSV(frame.metrics, [])} style={headerBtn('#374151')}>Export CSV</button>
+          <span
+            title="Python backend API status"
+            style={{
+              fontSize: 11,
+              color: backendStatus === 'online' ? '#86efac' : backendStatus === 'offline' ? '#fca5a5' : '#fcd34d',
+            }}
+          >
+            Backend: {backendStatus === 'checking' ? 'checking...' : backendStatus}
+          </span>
+          <button
+            onClick={handleRunBackendDefault}
+            disabled={backendLoading}
+            style={headerBtn('#0ea5e9')}
+            title="Run Python backend simulation using configs/agents.yaml"
+          >
+            {backendLoading ? 'Running backend...' : 'Run Backend Sim'}
+          </button>
         </div>
       </header>
 
@@ -301,7 +241,7 @@ export default function App() {
         {/* Left: canvas area */}
         <div style={{ flex: 1, padding: 16, overflow: 'auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {tab === 'editor' && (
-            <VenueEditor layout={layout} onChange={syncLayout} />
+            <VenueEditor layout={layout} onChange={setLayout} />
           )}
           {tab === 'simulation' && (
             <>
@@ -319,42 +259,10 @@ export default function App() {
                   <input type="checkbox" checked={showBottlenecks} onChange={e => setBottlenecks(e.target.checked)} />
                   Bottlenecks
                 </label>
-                <button onClick={() => setFireMode(f => !f)} style={{
-                  padding: '2px 8px', borderRadius: 4, fontSize: 11, cursor: 'pointer',
-                  background: fireMode ? '#7f1d1d' : 'transparent',
-                  color: fireMode ? '#fca5a5' : '#9ca3af',
-                  border: `1px solid ${fireMode ? '#ef4444' : '#4b5563'}`,
-                }}>
-                  🔥 {fireMode ? 'Place fire' : 'Fire mode'}
-                </button>
                 <span style={{ marginLeft: 'auto', fontSize: 11, color: '#4b5563' }}>
-                  {frame.agents.length} agents | T={Math.floor(frame.simTime / 60)}:{Math.floor(frame.simTime % 60).toString().padStart(2,'0')}
+                  step {playbackStep + 1} / {Math.max(totalFrames, 1)}
                 </span>
               </div>
-              {/* Exit scenario toggles */}
-              {layout.exits.length > 0 && (
-                <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
-                  <span style={{ fontSize: 11, color: '#6b7280' }}>Exits:</span>
-                  {layout.exits.map(ex => {
-                    const blocked = blockedExits.has(ex.id);
-                    return (
-                      <button key={ex.id} onClick={() => toggleExit(ex.id)} title={blocked ? 'Click to re-open exit' : 'Click to block exit'} style={{
-                        padding: '2px 8px', borderRadius: 4, fontSize: 11, cursor: 'pointer',
-                        background: blocked ? '#7f1d1d' : '#05351c',
-                        color: blocked ? '#fca5a5' : '#86efac',
-                        border: `1px solid ${blocked ? '#ef4444' : '#22c55e'}`,
-                      }}>
-                        {ex.id} {blocked ? '✗ BLOCKED' : '✓ OPEN'}
-                      </button>
-                    );
-                  })}
-                  {blockedExits.size > 0 && (
-                    <span style={{ fontSize: 10, color: '#f59e0b', marginLeft: 4 }}>
-                      ⚠ {blockedExits.size} exit{blockedExits.size > 1 ? 's' : ''} blocked — agents re-routing
-                    </span>
-                  )}
-                </div>
-              )}
               <SimCanvas
                 frame={frame}
                 layout={layout}
@@ -362,26 +270,8 @@ export default function App() {
                 showHeatmap={showHeatmap}
                 showAgents={showAgents}
                 showBottlenecks={showBottlenecks}
-                fireMode={fireMode}
-                onFireClick={handleFireClick}
               />
             </>
-          )}
-          {tab === 'estimator' && (
-            <div style={{ maxWidth: 560 }}>
-              <SafetyEstimator config={config} layout={layout} />
-            </div>
-          )}
-          {tab === 'scenarios' && (
-            <ScenarioManager
-              scenarios={scenarios}
-              currentLayout={layout}
-              config={config}
-              onSave={handleSaveScenario}
-              onLoad={handleLoadScenario}
-              onDelete={handleDeleteScenario}
-              onUpdateResults={handleUpdateScenarioResults}
-            />
           )}
         </div>
 
@@ -390,6 +280,26 @@ export default function App() {
           width: 300, background: '#1e2433', borderLeft: '1px solid #374151',
           padding: 14, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 16,
         }}>
+          {(backendSummary || backendError) && (
+            <div style={{ background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: 10 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#93c5fd', marginBottom: 8 }}>
+                Python Backend
+              </div>
+              {backendSummary && (
+                <div style={{ fontSize: 12, color: '#d1d5db', lineHeight: 1.5 }}>
+                  Steps: <b>{backendSummary.steps_run}</b><br />
+                  Exited: <b>{backendSummary.exited_agents}</b> / <b>{backendSummary.total_agents}</b><br />
+                  Remaining: <b>{backendSummary.remaining_agents}</b>
+                </div>
+              )}
+              {backendError && (
+                <div style={{ fontSize: 12, color: '#fca5a5', lineHeight: 1.4 }}>
+                  {backendError}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Metrics always visible */}
           <MetricsPanel
             metrics={frame.metrics}
@@ -400,15 +310,45 @@ export default function App() {
           />
 
           <div style={{ borderTop: '1px solid #374151', paddingTop: 12 }}>
-            <SimControls
-              config={config}
-              onChange={syncEngineConfig}
-              onRun={handleRun}
-              onPause={handlePause}
-              onStep={handleStep}
-              onReset={handleReset}
-              isRunning={frame.isRunning}
-            />
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+              <button
+                onClick={() => setPlaying((v) => !v)}
+                disabled={!backendSummary}
+                style={headerBtn(playing ? '#f59e0b' : '#22c55e')}
+              >
+                {playing ? 'Pause' : 'Play'}
+              </button>
+              <button
+                onClick={() => {
+                  if (!canStep) return;
+                  setPlaybackStep((s) => s + 1);
+                }}
+                disabled={!canStep}
+                style={headerBtn('#60a5fa')}
+              >
+                Step
+              </button>
+              <button
+                onClick={() => {
+                  if (!canBack) return;
+                  setPlaybackStep((s) => s - 1);
+                }}
+                disabled={!canBack}
+                style={headerBtn('#6b7280')}
+              >
+                Back
+              </button>
+              <button
+                onClick={() => {
+                  setPlaying(false);
+                  setPlaybackStep(0);
+                }}
+                disabled={!backendSummary}
+                style={headerBtn('#ef4444')}
+              >
+                Reset
+              </button>
+            </div>
           </div>
         </div>
       </div>

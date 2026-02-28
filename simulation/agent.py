@@ -80,6 +80,11 @@ class HumanLLMAgent(LLMAgent):
 
     async def astep(self):
         self.last_speech = None
-        obs = await self.agenerate_obs()
-        plan = await self.reasoning.aplan(prompt=self.step_prompt, obs=obs)
-        await self.aapply_plan(plan)
+        # Newer mesa-llm versions may not expose async helpers on LLMAgent.
+        # Fallback to sync flow when async methods are unavailable.
+        if hasattr(self, "agenerate_obs") and hasattr(self.reasoning, "aplan") and hasattr(self, "aapply_plan"):
+            obs = await self.agenerate_obs()
+            plan = await self.reasoning.aplan(prompt=self.step_prompt, obs=obs)
+            await self.aapply_plan(plan)
+            return
+        self.step()
