@@ -6,5 +6,3 @@ __pycache__/
 *.pyc
 **/.DS_Store
 .venv
-linkedin_cache.json
-ACCEPTED-LIST.csv

@@ -1,0 +1,224 @@
+name,"What is your LinkedIn profile? If you have no account, provide personal webpage or Github.",Some exceptional things you have built or archivements you are proud of?
+Sepehr Pourghannad,https://linkedin.com/in/sepehr-pourghannad,"Pintos (an operating system capable of doing thread/process management, filesystem support and scheduling)
+
+Decaf complier (a full compiler for the decaf language that support polymorphism)
+
+My publications (can be found on linkedin)
+
+My thesis on using GPUs in databases (more info on linkedin page)
+
+My national and international mathematical olympiad experience (more info on linkedin)"
+Enrico Toniato,https://linkedin.com/in/enrico-toniato,"CTO manufact (yc s25), tech lead ibm research Zurich"
+Maxim Gusev,https://linkedin.com/in/maximgusev,"1. Built a service that uses vision models to improve CVs with over 500 active users
+2. Won the Google Cloud Challenge at a Cambridge Legal AI hackathon with over 400 participants. https://hackthelaw-cambridge.com/hackathon-2025/ (Team Lexathon)
+3. Built scrapers that actively get all retail data of all major swiss gorcery stores, and I am now actively building an API to have real-time grocery price data available to other companies. (work in progress shoparoo.io)
+4. Did Transformer research at ETH for my master thesis (6.0 distinction).
+5. Finished my ETH Computer Science masters with a 5.55 average.
+6. Organized a legal AI hackathon with major law firms and Lovable, as part of the Futuristic Law Lab https://futuristlawlab.com/"
+Simon Sukup,https://linkedin.com/in/simon-sukup-7574b4218,"I worked on several impactful projects:
+
+I am currently starting a position as Student Researcher at the Microsoft, working on the Foundation Models and Robotics team, where I am building novel supervision approaches for multimodal foundation models with flow matching heads.
+
+I built a framework and several packages within the NVIDIA Isaac Lab robotics simulation software for neural reconstruction and reinforcement learning for dexterous robotics, which are currently used by company Gravis Robotics and the Robotic Systems Lab.
+
+I developed a novel, hard-to-translate dataset generation framework using optimization on large language reward models as part of a research project with Google Fellow Vilem Zouhar (currently aiming for publication).
+
+During previous ML and Data Science internships, I worked on projects for S&P 500 customers, scaling training data pipelines to hundreds of gigabytes. Additionally, I worked as a Computer Vision Research Assistant prior to my studies at ETH."
+Elisabeth von Oswald,https://linkedin.com/in/elisabeth-von-oswald-045649238,"- Voice-first AI singing teacher
+- Research Colab with Google Zurich: Advancing Knowledge Tracing with Large Language Models: A Study of AI and Human
+Collaboration in Education
+- 1st Place in the Berlin ElevenLabs WW Hackathon"
+Mehrshad Mirmohammadi,https://linkedin.com/in/mmirmohammadi,"Codeforces Grandmaster — ranked among the world’s top competitive programmers, showing exceptional problem-solving speed and technical depth.
+
+IOI Silver Medalist — won a medal at the International Olympiad in Informatics, a highly selective global competition in computer science.
+
+ETH Zurich MSc in Computer Science (Machine Learning) — studying at one of the world’s leading technical universities, with a focus on AI/ML.
+
+Jane Street Quant Research Intern — selected by one of the most competitive quantitative trading firms, demonstrating strong analytical and coding ability in real-world high-performance environments."
+Michal Tesnar,https://linkedin.com/in/michal-tesnar,I built my own agent to look for housing for me http://github.com/MichalTesnar/auto-house and I am currently building agents to solve ARC challenge at Tufalabs.
+Suter Gabriel,https://linkedin.com/in/gabriel-suter-18973329a,"I'm a solo founder building an AI-powered product ecosystem for traders, all from scratch in ~1 month.
+
+It started with Stravesta, a vision for an AI-driven trading performance platform with setup scoring, behavior detection, and a personalized market scanner. I quickly realized: without clean, structured data, AI is worthless. So I built the data foundation first:
+
+Entrio (https://www.entrio.cloud/), an AI trading journal, currently in invite-only beta. Traders upload screenshots, OpenAI Vision (gpt-4.1) auto-extracts trade data (symbol, direction, SL/TP, timeframe). Includes an AI Trade Coach (GPT-4.1, 200-trade context), AI-generated weekly reports, psychology tracking with emotional shift analysis, Stripe billing, 7-language i18n, and a full Chrome Extension with Side Panel for in-browser trade capture. PWA-enabled.
+
+ExtensionReach, an internal LinkedIn outreach tool I built for my own beta tester acquisition. Features a 10-stage lead pipeline, automated lead discovery (LinkedIn API, Reddit, TradingView, Substack, Medium), Perplexity web research per lead, AI draft generation, and a Chrome Extension for LinkedIn DOM automation. Currently building two AI agents on top: Claudia (outreach intelligence) and Ale (content manager).
+
+Everything connected through Supabase (PostgreSQL, Edge Functions, RLS, Realtime) and hosted on Vercel. Currently part of the AWS Startup Program and Supabase Startup Program."
+Nathan Ordonez,https://linkedin.com/in/nathan-axcan-ordonez,"10x TTFT speedup through independent caching, FA modification and scheduler/hash on ibm/vllm repo
+Technical+ideation+formation of team funded by EU grant to develop from scratch a hologram-based distance teaching platform (threejs+node+lidar+webrtc)
+DNA basecalling deep learning architecture innovations causing 2.5x speedup (Msc thesis)
+Variational Eigensolver implementation demonstrated on QuTech quantum computer"
+Tianjian Yi,https://linkedin.com/in/tianjian-yi-064461212,"Diffusion Transformer, Ai Agents for math, Happiness Explorer website, AI diary"
+Avi,https://linkedin.com/in/paloma-ana-daniele,"Hi!
+
+Please find all of my projects at: http://ana.zero.swiss :)
+
+I live and breathe ambient systems as an AI engineer at IBM, and am currently building my own startup to apply for YCombinator (was part of their last event at ETH). Id love to participate!!
+
+- building real-world PoCs with multi-agent orchestration, agentic workflows & Foundation Models on watsonx
+
+- built ambient intelligence systems using event-driven architecture, LangChain, LangSmith & AstraDB
+
+- developed a call center analytics platform with real-time transcription, speaker separation & sentiment analysis
+
+- built a strategic insight monitoring platform for trend analysis using ElasticSearch & agentic workflows
+
+- end-to-end computer vision system for drone-based object detection using YOLOv5/8 & PyTorch
+
+- built MCP servers exposing internal APIs with caching & reduced token footprint
+
+- Automated complex web workflows by wiring browser-use agents into LLM toolchains
+
+- Clarx — an in-browser ML reading assistant that simplifies papers 
+
+- Full-Stack Dev behind HackSTAIR — STAIR’s flagship student hackathon website"
+Yiwen Zhao,https://linkedin.com/in/yiwenzhao,A performance evaluation system for agentic AI use cases in the banking industry. Outcome: decision-ready 1-page eval cheatsheet and process-as-product.
+Adrián Martínez López,https://linkedin.com/in/adrian-martinez-lopez,"- Building AI agents at Oracle to enhance RAG performance.
+- Building a fashion retail search tool based on CLIP embeddings and classical algorithms like BM25
+- Toxicity mitigation on LLMs based on Transformers and State Space Models with weight-based interventions (no need to retrain models)"
+Elizabeth,https://linkedin.com/in/elizabeth-xi-zhang,"I have won multiple Hackathons in the past months, building and connecting with the world all over Europe. "
+Bivek Panthi,https://linkedin.com/in/bivek-panthi-87ba7b20a,"- Trained a Flow Matching model to map unperturbed cell distributions to perturbed cell states, conditioned on genetic variation.
+- customer-facing AI Agent to production.
+- A fast and precise contradiction checker algorithm: detects factual contradictions across large document corpora, and deployed on GCP.
+- incremental web scraper deployed in Azure to extract a large corpus of documents (more than 1M)."
+Bianca Milczarek,https://linkedin.com/in/bianca-milczarek-a29b4636b,Marketing at ETH Robotics Club 
+Andreas Schlaginhaufen,https://linkedin.com/in/andreas-schlaginhaufen,"Making preference-based RL work for robotics:
+- https://arxiv.org/abs/2506.09508
+- https://github.com/andrschl/isaac_rlhf"
+Emre Kuru,https://linkedin.com/in/emre-kuru-35a178223,"IRouterLM: Adaptive Query Routing for Multimodal RAG | : Link: https://github.com/ananoymous-submission/sigir26
+
+IRouterLM is a query-aware routing framework that dynamically selects the optimal retrieval pipeline (Text vs. Multimodal, Dense vs. Late-Interaction) for a given query. In our results, IRouterLM achieved state-of-the-art retrieval accuracy while reducing inference latency by approximately 90%. I was responsible for building the entire pipeline, router training and evaluation. I also contributed to the writing process of the paper. 
+
+
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+EvoAgentX: a Self-Evolving Ecosystem of AI Agents | Link: https://github.com/EvoAgentX/EvoAgentX
+
+In EvoAgentX I developed automatic loading and parsing of text and image content as well as the pipeline for Multimodal Retrieval Augmented Generation. Furthermore, I also worked on the prompt optimization module with GEPA."
+Anthony Gerardo Giuliano,https://linkedin.com/in/anthony-giuliano-a11876187,"Founder of HandyGo, an AI-powered SaaS platform for technical maintenance companies, developed within the Tech Europe Foundation Ignition program.  
+one year of AI research, working on a prosthetic arm controlled by EEG
+I ranked 15th at the Italian National Finals of the Team Informatics Olympiad and reached the National Finals of Olicyber.IT, earning a Bronze Medal (Italy’s national cybersecurity competition)."
+Guillermo Llopis,https://linkedin.com/in/guillermollopis,Many hackathons and for the last year I have been working on AI agents at a company and have my own startup in the same topic
+Sandhanakrishnan Ravichandran,https://linkedin.com/in/sandhanakrishnanr,Reddit Agent for implicit promotion and measuring engagement metrics and optimizing the process
+Gianlorenzo Occhipinti,https://linkedin.com/in/gianlorenzo-o,The most important e-commerce in Italy for manga and stuff from japan. https://mangayo.it
+Reza Hosseini,https://linkedin.com/in/rezahoseini,"Built Marsys, an open-source multi-agent AI system that excels at knowledge intensive works (such as research, literature review, financial work, etc.).
+
+https://github.com/rezaho/MARSYS"
+Nilson Kufus,https://linkedin.com/in/nilsonkufus,Gigapixel Camera and 18M lines of code with Claude code
+Ralf Boltshauser,https://linkedin.com/in/ralfboltshauser,"Winning European Championship in Business Development at EuroSkills Gdansk
+
+Winning plenty of hackathons like 2x Basel Hack
+2. Place at ETH AI Hack
+2. at Moin Hack
+
+Exploring AI Agent Capabilities:
+- Dune Bench -> Full Dune Boardgame to benchmark AI Agents
+- Cursor Sub Agents CLI before cursor shipped it
+- Automatic Startup Validation tool with Apollo API + Elevenlabs Voice Agents to conduct interviews with a specific ICP based on Lean Customer Development
+
+This hack sounds amazing and I would love to be there 🫶🏼
+
+Thanks for bringing such opportunities to Zürich, amazing work!!"
+Jan Tempus,https://linkedin.com/in/jan-allan-tempus-1491b7106,"I have re-designed the tokenisation algorithm from first principles, beating the current state of the art on the metrics the research community believes are vital to better downstream performance"
+Amin Oudrhiri,https://linkedin.com/in/amin-oudrhiri-870789259,"Winning the biggest student lead hackathon in europe (IC hack)
+Building ai infra for mac unified memory
+Landing positions at top quant shops"
+Mauro Pellonara,https://linkedin.com/in/mauro-pellonara,"Most recently, I have bootstrapped a game to 4M page views, 500k unique visitors, 25k app downloads, 300 euros monthly profits.
+During my time at PwC, I engineered a zero-downtime deployment architecture, improving release stability drastically and reducing
+overtime hours in the whole department by 60%, supervised the project together with senior management. I also built an AI Agent that writes captions for Instagram posts grounded on internal knowledge for the top client."
+Sotiris Karapiperis,https://linkedin.com/in/sotiris-karapiperis-16399a16a,Part of the Samsung Team that built the next generation of generative audio models. 
+Federico Gossi,https://linkedin.com/in/federicogossi,"4 research papers in computer science (NeurIPS, Nature) while completing my master at ETH in 4 semesters. Bootstrapped my startup until 1M$ in ARR in 7 months, then raised a 6.5M$ seed and growing"
+Daria Godorozha,https://linkedin.com/in/daria-godorozha,I've won a large Cambridge/Stanford cODEX Hackathon and was offered funding after. I am the Team Captain of the London HPC Team. I am currently working on a project with the ETH Zurich executive leadership and lead a research group at Oxford.
+Mirto Randellini,https://linkedin.com/in/mirto-randellini,"Designed and developed AI-powered extraction systems that helped retain key enterprise customers in my job at ETH spin-off Scalera, which aims to automate spec-to-product matching in the construction industry."
+Martina Manno,https://linkedin.com/in/martina-manno,"Second level master degree thesis on A Hybrid Vision Transformer Ensemble for Malware classification through grayscale and entropy
+analysis"
+Shivram Sambhus,https://linkedin.com/in/shividotio,"projects/competitions:
+- csnotes: 35k+ unique monthly visitors
+- multiplayer snake game (high school thesis, endress+hauser award)
+- 1st @ swissquote campus challenge
+- 2nd @ viscon24
+- 4th @ a-isac aviation ctf
+
+experience:
+- incoming @ ESA
+- current Swe @ Bewy, Research @ Racklette+SPCL
+- prev @ Infosys, Cyber Command, Discrete Math TA @ ETHZ"
+Jekaterina Jaroslavceva,https://linkedin.com/in/jekaterina-jaroslavceva,Image generation features for Microsoft products
+Sara Rutz,https://linkedin.com/in/sara-rutz,https://www.sararutz.ch/project-failtopia.html 
+Liam Thate,https://linkedin.com/in/liam-thate-2a4a98175,In my Bachelor thesis at MIT I built an AI workflow with Large Language Models for Autonomous Digital Twin Adaptation in Semiconductor Manufacturing.
+Dimitrios Prasakis,https://linkedin.com/in/dimitrispd,"- An ML model for phishing URL detection in emails with novel features (pre LLM era, as an undergrad thesis).
+- Minoan Security (Founder)
+- Stealth mode product in AI security that will go public this year, as part of my MSc practicum"
+Alkinoos Sarioglou,https://linkedin.com/in/alkinoos-sarioglou,"- Built Purpose:Labs from scratch: a fully functional agentic life and career navigation platform that reached 550 weekly active users, runs a paid pilot with PowerCoders, and is in exploration with ETH Zurich and Tecnológico de Monterrey (90,000 students).
+
+- Developed a wearable device to detect heart arrhythmias of my grandmother: When I spoke to my grandmother she voiced the concern of a health threat happening to her and nobody getting notified. I immediately got to work to build a device that would solve this problem (year 2019 - before the Apple Watch and WHOOP were adopted). Built the device which monitored her heart rate in real-time and I could see it on a web dashboard from the other side of the world and get notified if irregularities arose.
+
+- Research student at MIT: explored the impact of smartphone use on cognitive load using ML techniques, developed own model that predicts which mobile app the user is using based on their brain waveforms with 71% accuracy
+
+- Top 2nd student in the Bachelor Engineering class with GPA 89.5%
+
+- UKESF Scholarship received by Arm (semiconductor company): scholarship awarded to the most capable electronics students in the UK
+
+- Built a buggy robot and won a software award at the University of Manchester for the navigation algorithm
+
+- Co-founded a music band with my friends at the age of 10. In the following 7 years we started from our basement and we ended up playing in the biggest festivals in Greece, recorded 2 EPs, played 100+ concerts and had a label offer."
+Wiona Glänzer,https://linkedin.com/in/wiona-glaenzer,I've trained SOTA antibody language models and published a paper about them at NeurIPS 2025 after less than one year in my PhD.
+Thomas Bollenbach,https://linkedin.com/in/thomas-bollenbach,Control Electronics Architecture for an autonomous Rover
+Damiano Amatruda,https://linkedin.com/in/damiano-amatruda,"I’ve been building software since I was a kid, starting with reverse engineering and systems programming, then moving into large-scale open source, security tooling, and more recently AI research and LLM training systems.
+
+- Jul 2012 – Feb 2013 (age 11–12): Galaxy Life LockER BLUE
+  I collaborated with another developer on a reverse-engineering project and a cheat tool for the Facebook game “Galaxy Life” in C++. The tool was popular in the game community at the time. This is where I first learned how to understand large systems from the outside, make tools stable for real users, and ship updates quickly.
+
+- Aug 2013 (age 12–13): Info64
+  I reverse-engineered the Nintendo 64 ROM metadata structure and built a Windows GUI editor for it in C#.
+  URL: https://github.com/damianoamatruda/info64
+
+- Jan 2014 (age 13): MinecraftAPI
+  I reverse-engineered the Minecraft login API and implemented it as a clean PHP library.
+  URL: https://github.com/damianoamatruda/minecraft-api
+
+- 2014 (age 13–14): SchoolDiary
+  I built an electronic gradebook app (a bleeding-edge Node.js/React web app with a MySQL database) that was meant to be fast and simple to use for students and teachers. It was one of my first “full product” builds with frontend, backend, and data model.
+
+- Jun 2018 – Aug 2018 (age 17–18): nds-bootstrap
+  I co-created (with 4 other devs) the backend of an open-source Nintendo DS application that runs software/ROMs. This is part of the DS Homebrew ecosystem and is still actively used today.
+  URL: https://github.com/DS-Homebrew/nds-bootstrap
+  (Related project: TWiLight Menu++ is a widely used frontend in the same ecosystem.)
+  URL: https://github.com/DS-Homebrew/TWiLightMenu
+
+- Mar 2021 – Jul 2021 (age 20): Masters of Renaissance
+  In a team of three, I built a multiplayer game in Java based on a board game, with client/server logic and testing.
+  URL: https://github.com/damianoamatruda/masters-of-renaissance
+
+- Apr 2021 – Jul 2021 (age 20): Politecnico di Milano mobile app renewal
+  I was appointed to kick-start the renewal of the university mobile app. I gathered requirements with students, professors, and administration, worked with UI/UX designers, designed the data model, built the React frontend, and implemented the backend API.
+
+- Aug 2021 (age 20–21): Music Player
+  I built a full web application for uploading and playing songs organized in playlists, including database design and a robust backend.
+
+- Oct 2021 (age 21): yt-dlp contributions
+  I contributed to yt-dlp, a widely used downloader tool, by reverse-engineering APIs for Microsoft Stream, Cisco Webex, and ON24 and implementing extractors, plus improving parsing/merging behavior.
+  URL: https://github.com/yt-dlp/yt-dlp
+
+- Sep 2021 – Oct 2022 (age 21–22): Skyward Experimental Rocketry
+  I rewrote the build system for the rocket’s on-board software in CMake, reducing build time from 51 minutes to 4 minutes, a big productivity and reliability win for the whole team.
+  URL: https://github.com/skyward-er/boardcore
+
+- Jul 2023 – Aug 2023 (age 22–23): Destructive Ranch
+  I rebuilt, with a teammate, our automated exploit system for Attack/Defense CTF competitions. It is used operationally by our team, including at high-stakes international finals.
+
+- Feb 2024 – May 2024 (age 23): ETH AI Center (mechanistic interpretability of state space models, PyTorch, team of 4)
+  We explored interpretability methods applied to state space models, focusing on making internals more observable and running targeted analyses rather than only end metrics.
+
+- Jun 2024 – Sep 2024 (age 23–24): Google Zürich
+  I ran applied research experiments on distilling LLMs, measuring the accuracy vs efficiency trade-off. I also contributed a fix to JAX internals: https://github.com/jax-ml/jax/pull/23398
+
+- Sep 2024 – Dec 2024 (age 24): EPFL NLP Lab
+  With two PhD students, I wrote training and evaluation code for a novel multimodal LLM using Hugging Face Transformers. I also found and fixed a bug in HF’s XGLM implementation: https://github.com/huggingface/transformers/pull/35878
+
+- Sep 2025 – Dec 2025 (age 25): Swiss AI
+  In a team of three, I trained and benchmarked GPT-OSS, Qwen3-Next, DeepSeek v3.2, and also Mamba and Gated DeltaNet, integrating training innovations like AdEMAMix, Goldfish Loss, XSSSLUR2, and reporting performance across runs on GH200 GPUs (Alps supercomputer)."
