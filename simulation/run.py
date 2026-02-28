@@ -15,6 +15,7 @@ def main():
 
     env = cfg["environment"]
     door_position = tuple(env["door"])
+    obstacles = [tuple(o) for o in env.get("obstacles", [])]
 
     model = EvaluationModel(
         width=env["width"],
@@ -23,6 +24,7 @@ def main():
         door_position=door_position,
         agent_configs=cfg["agents"],
         llm_model=env["llm_model"],
+        obstacles=obstacles,
     )
 
     while model.running:
@@ -46,6 +48,8 @@ def main():
         width=env["width"],
         height=env["height"],
         door_position=door_position,
+        speech_history=model.speech_history,
+        obstacles=obstacles,
     )
 
 

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import asyncio
+
 from mesa import Model
 from mesa.space import MultiGrid
 
@@ -23,13 +25,16 @@ class EvaluationModel(Model):
         door_position: tuple[int, int],
         agent_configs: list[dict],
         llm_model: str,
+        obstacles: list[list[int]] | None = None,
     ):
         super().__init__()
         self.grid = MultiGrid(width, height, torus=False)
         self.deadline = deadline
         self.door_position = tuple(door_position)
+        self.obstacles: set[tuple[int, int]] = {tuple(o) for o in obstacles} if obstacles else set()
         self.current_step = 0
         self.position_history: list[dict] = []  # [{name: (x,y) | "exited"}, ...]
+        self.speech_history: list[dict] = []   # [{name: str | None}, ...]
         self._all_agent_names: list[str] = []
 
         for cfg in agent_configs:
@@ -40,8 +45,8 @@ class EvaluationModel(Model):
                 role=cfg["role"],
                 personality=cfg["personality"],
                 llm_model=llm_model,
-                vision_radius=cfg["vision_radius"],
                 door_position=self.door_position,
+                obstacles=self.obstacles,
             )
             self.grid.place_agent(agent, position)
             self._all_agent_names.append(cfg["name"])
@@ -60,16 +65,27 @@ class EvaluationModel(Model):
             return
 
         print(f"\n=== Step {self.current_step + 1} / {self.deadline} ===")
-        self.agents.shuffle_do("step")
+
+        async def _run_parallel():
+            await asyncio.gather(*[a.astep() for a in self.agents])
+
+        asyncio.run(_run_parallel())
         self._check_door_exits()
         self.current_step += 1
 
-        # Record positions; exited agents get "exited" sentinel
-        active_positions = {a.name: a.pos for a in self.agents}
-        frame: dict[str, tuple | str] = {}
+        # Record positions and speech for this step
+        active_agents = {a.name: a for a in self.agents}
+        pos_frame: dict[str, tuple | str] = {}
+        speech_frame: dict[str, str | None] = {}
         for name in self._all_agent_names:
-            frame[name] = active_positions.get(name, "exited")
-        self.position_history.append(frame)
+            if name in active_agents:
+                pos_frame[name] = active_agents[name].pos
+                speech_frame[name] = active_agents[name].last_speech
+            else:
+                pos_frame[name] = "exited"
+                speech_frame[name] = None
+        self.position_history.append(pos_frame)
+        self.speech_history.append(speech_frame)
 
         if not list(self.agents):
             print("\nAll agents have exited!")
