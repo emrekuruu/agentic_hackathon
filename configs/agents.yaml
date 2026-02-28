@@ -3,7 +3,9 @@ environment:
   height: 10
   deadline: 20
   llm_model: "openai/gpt-5.2"
-  door: [9, 5]
+  doors:
+    - [9, 5]
+    - [0, 4]
   obstacles:
     - [7, 6]
     - [8, 6]

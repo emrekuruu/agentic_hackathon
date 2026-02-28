@@ -1,12 +1,14 @@
 from __future__ import annotations
 
+import json
 import yaml
 from dotenv import load_dotenv
 
 from simulation.model import EvaluationModel
-from simulation.visualization import animate
 
 load_dotenv()
+
+TRAJECTORY_FILE = "trajectory.json"
 
 
 def main():
@@ -14,14 +16,14 @@ def main():
         cfg = yaml.safe_load(f)
 
     env = cfg["environment"]
-    door_position = tuple(env["door"])
+    door_positions = [tuple(d) for d in env["doors"]]
     obstacles = [tuple(o) for o in env.get("obstacles", [])]
 
     model = EvaluationModel(
         width=env["width"],
         height=env["height"],
         deadline=env["deadline"],
-        door_position=door_position,
+        door_positions=door_positions,
         agent_configs=cfg["agents"],
         llm_model=env["llm_model"],
         obstacles=obstacles,
@@ -43,14 +45,17 @@ def main():
             print(f"--- {name} --- EXITED")
         print()
 
-    animate(
-        history=model.position_history,
-        width=env["width"],
-        height=env["height"],
-        door_position=door_position,
-        speech_history=model.speech_history,
-        obstacles=obstacles,
-    )
+    trajectory = {
+        "width": env["width"],
+        "height": env["height"],
+        "door_positions": [list(d) for d in door_positions],
+        "obstacles": [list(o) for o in obstacles],
+        "history": model.position_history,
+    }
+    with open(TRAJECTORY_FILE, "w") as f:
+        json.dump(trajectory, f)
+    print(f"Trajectory saved to {TRAJECTORY_FILE}")
+    print(f"Visualize with: python -m simulation.visualize")
 
 
 if __name__ == "__main__":

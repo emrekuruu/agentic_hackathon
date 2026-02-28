@@ -11,7 +11,7 @@ class HumanLLMAgent(LLMAgent):
 
     Each agent has a unique personality and role encoded in its system prompt.
     Each step the agent observes nearby agents, reasons via CoT, and executes
-    move / speak tool calls. When it reaches the door it exits the simulation.
+    move tool calls. When it reaches any door it exits the simulation.
     """
 
     def __init__(
@@ -21,7 +21,7 @@ class HumanLLMAgent(LLMAgent):
         role: str,
         personality: str,
         llm_model: str,
-        door_position: tuple[int, int],
+        door_positions: set[tuple[int, int]],
         obstacles: set[tuple[int, int]],
     ):
         w = model.grid.width
@@ -29,6 +29,7 @@ class HumanLLMAgent(LLMAgent):
         vision_radius = w + h  # see the entire grid
 
         obstacles_str = ", ".join(str(o) for o in sorted(obstacles)) if obstacles else "none"
+        doors_str = ", ".join(str(d) for d in sorted(door_positions))
 
         system_prompt = (
             f"You are {name}, a human participant in a group simulation.\n"
@@ -36,22 +37,21 @@ class HumanLLMAgent(LLMAgent):
             f"Your personality: {personality}.\n\n"
             f"The grid is {w} × {h}. Valid positions: x from 0 to {w - 1}, y from 0 to {h - 1}. "
             "You cannot move outside these bounds.\n"
-            f"The exit door is at {door_position}. "
+            f"Exit doors are at: {doors_str}. Reach any one of them to exit. "
             f"Impassable walls are at: {obstacles_str}.\n\n"
             "Each turn you receive an observation of your position and all other participants. "
-            "You MUST choose EXACTLY ONE action per turn — either move OR speak, never both:\n"
-            "- move_one_step(direction): move in one of 8 directions "
-            "(North, South, East, West, NorthEast, NorthWest, SouthEast, SouthWest)\n"
-            "- speak_nearby(message): say something to everyone within range\n\n"
-            "Call exactly one tool. Do not call both in the same turn."
+            "Choose exactly one action:\n"
+            "- move_one_step(direction): move one cell. "
+            "Direction must be one of: North, South, East, West, NorthEast, NorthWest, SouthEast, SouthWest.\n"
+            "- stay_put(): remain in your current position this turn.\n"
+            "Your goal is to reach any exit door and leave."
         )
 
         step_prompt = (
             f"Grid: {w}×{h} (x: 0–{w - 1}, y: 0–{h - 1}). "
-            f"Exit door: {door_position}. "
+            f"Exit doors: {doors_str}. "
             f"Walls: {obstacles_str}. "
-            "Your goal is to reach the door and leave the room. "
-            "Choose EXACTLY ONE action: move one step toward the door, or speak to nearby participants. Not both."
+            "Move toward the nearest door, or stay_put() if you must wait."
         )
 
         super().__init__(
@@ -67,19 +67,16 @@ class HumanLLMAgent(LLMAgent):
         self.role = role
         self.personality = personality
         self.vision_radius = vision_radius
-        self.door_position = door_position
+        self.door_positions = door_positions
         self.obstacles = obstacles
         self.exited = False
-        self.last_speech: str | None = None
 
     def step(self):
-        self.last_speech = None
         obs = self.generate_obs()
         plan = self.reasoning.plan(obs=obs)
         self.apply_plan(plan)
 
     async def astep(self):
-        self.last_speech = None
         obs = await self.agenerate_obs()
         plan = await self.reasoning.aplan(prompt=self.step_prompt, obs=obs)
         await self.aapply_plan(plan)
