@@ -12,6 +12,60 @@ load_dotenv()
 TRAJECTORY_FILE = "trajectory.json"
 
 
+def _in_main_area(x: int, y: int, width: int, height: int) -> bool:
+    x_min, x_max = width * 0.15, width * 0.85
+    y_min, y_max = height * 0.35, height * 0.65
+    return x_min <= x <= x_max and y_min <= y <= y_max
+
+
+def _build_obstacle_spawn_candidates(
+    width: int,
+    height: int,
+    blocked: set[tuple[int, int]],
+    source_obstacles: list[tuple[int, int]],
+    rng: random.Random,
+    limit: int,
+) -> list[tuple[int, int]]:
+    """Return free cells ordered from closest to obstacle cells outward."""
+    if not source_obstacles or limit <= 0:
+        return []
+
+    picked: set[tuple[int, int]] = set()
+    ordered: list[tuple[int, int]] = []
+    max_radius = max(width, height)
+
+    for radius in range(1, max_radius + 1):
+        ring: list[tuple[int, int]] = []
+        for ox, oy in source_obstacles:
+            for dx in range(-radius, radius + 1):
+                for dy in range(-radius, radius + 1):
+                    if max(abs(dx), abs(dy)) != radius:
+                        continue
+                    nx, ny = ox + dx, oy + dy
+                    pos = (nx, ny)
+                    if (
+                        nx < 0
+                        or ny < 0
+                        or nx >= width
+                        or ny >= height
+                        or pos in blocked
+                        or pos in picked
+                    ):
+                        continue
+                    ring.append(pos)
+        if ring:
+            rng.shuffle(ring)
+            for pos in ring:
+                if pos in picked:
+                    continue
+                picked.add(pos)
+                ordered.append(pos)
+                if len(ordered) >= limit:
+                    return ordered
+
+    return ordered
+
+
 def _generate_random_agent_configs(env: dict, door_positions: list[tuple[int, int]], obstacles: list[tuple[int, int]]) -> list[dict]:
     width = env["width"]
     height = env["height"]
@@ -21,25 +75,40 @@ def _generate_random_agent_configs(env: dict, door_positions: list[tuple[int, in
 
     rng = random.Random(env.get("random_seed"))
     blocked = set(door_positions) | set(obstacles)
-    valid_positions = [
+    free_positions = [
         (x, y)
         for x in range(width)
         for y in range(height)
         if (x, y) not in blocked
     ]
 
-    if num_agents > len(valid_positions):
+    if num_agents > len(free_positions):
         raise ValueError(
             f"Cannot place {num_agents} agents on {width}x{height} grid "
-            f"with {len(blocked)} blocked cells; max is {len(valid_positions)}."
+            f"with {len(blocked)} blocked cells; max is {len(free_positions)}."
         )
 
-    rng.shuffle(valid_positions)
+    main_obstacles = [o for o in obstacles if _in_main_area(o[0], o[1], width, height)]
+    obstacle_source = main_obstacles or obstacles
+    candidate_positions = _build_obstacle_spawn_candidates(
+        width=width,
+        height=height,
+        blocked=blocked,
+        source_obstacles=obstacle_source,
+        rng=rng,
+        limit=num_agents,
+    )
+
+    if len(candidate_positions) < num_agents:
+        remainder = [pos for pos in free_positions if pos not in set(candidate_positions)]
+        rng.shuffle(remainder)
+        candidate_positions.extend(remainder[: num_agents - len(candidate_positions)])
+
     name_prefix = env.get("agent_name_prefix", "Agent")
 
     agents: list[dict] = []
     for i in range(num_agents):
-        x, y = valid_positions[i]
+        x, y = candidate_positions[i]
         agents.append(
             {
                 "name": f"{name_prefix} {i + 1}",
@@ -89,9 +158,13 @@ def main():
     print("\n=== Simulation complete ===")
     print(f"Ran for {model.current_step} steps.\n")
 
+    final_status = model.status_history[-1] if model.status_history else {}
     for name in model._all_agent_names:
         agent = next((a for a in model.agents if a.name == name), None)
-        if agent:
+        status = final_status.get(name, "active" if agent else "exited")
+        if status == "dead":
+            print(f"--- {name} --- DEAD")
+        elif agent:
             print(f"--- {name} @ {agent.pos} ---")
             if agent.memory is not None:
                 print(agent.memory.get_prompt_ready())

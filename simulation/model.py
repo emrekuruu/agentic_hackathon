@@ -112,10 +112,11 @@ class EvaluationModel(Model):
             return
         for agent in list(self.agents):
             if agent.pos in self.fire_cells:
+                death_pos = agent.pos
                 self._dead_agent_names.add(agent.name)
                 self.grid.remove_agent(agent)
                 agent.remove()
-                print(f"  !! {agent.name} died in fire at {agent.pos}")
+                print(f"  !! {agent.name} died in fire at {death_pos}")
 
     def _check_door_exits(self):
         for agent in list(self.agents):
@@ -132,13 +133,6 @@ class EvaluationModel(Model):
             return
 
         print(f"\n=== Step {self.current_step + 1} / {self.deadline} ===")
-        self._spread_fires()
-        self._check_fire_deaths()
-        if not list(self.agents):
-            self.current_step += 1
-            self._record_frame()
-            self.running = False
-            return
 
         async def _run_parallel():
             await asyncio.gather(*[a.astep() for a in self.agents])
@@ -146,11 +140,13 @@ class EvaluationModel(Model):
         asyncio.run(_run_parallel())
         self._check_fire_deaths()
         self._check_door_exits()
+        self._spread_fires()
+        self._check_fire_deaths()
         self.current_step += 1
         self._record_frame()
 
         if not list(self.agents):
-            print("\nAll agents have exited!")
+            print("\nAll agents have exited or died!")
             self.running = False
 
     def _record_frame(self):
