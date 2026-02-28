@@ -544,6 +544,22 @@ with st.sidebar:
         st.session_state.profiles = {p["name"]: p for p in profiles}
         st.rerun()
 
+    if st.button("🎓 Load Hackathon Participants"):
+        from hackathon_profiles import generate_hackathon_profiles
+        from generate_profiles import save_profiles
+
+        with st.spinner("Scraping LinkedIn & generating profiles (first run may take a few minutes)..."):
+            profiles, new_agents = generate_hackathon_profiles(
+                grid_width=env["width"],
+                grid_height=env["height"],
+                door_position=tuple(env["door"]),
+                obstacles=[tuple(o) for o in env.get("obstacles", [])],
+            )
+        save_profiles(profiles, path="profiles_hackathon.json")
+        st.session_state.config["agents"] = new_agents
+        st.session_state.profiles = {p["name"]: p for p in profiles}
+        st.rerun()
+
     for i, agent in enumerate(agents_cfg):
         with st.expander(f"{agent['name']}  ({agent['role']})", expanded=False):
             c1, c2 = st.columns(2)
