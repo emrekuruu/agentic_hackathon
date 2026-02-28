@@ -11,7 +11,7 @@ class HumanLLMAgent(LLMAgent):
 
     Each agent has a unique personality and role encoded in its system prompt.
     Each step the agent observes nearby agents, reasons via CoT, and executes
-    move / speak tool calls. When it reaches the door it exits the simulation.
+    move tool calls. When it reaches the door it exits the simulation.
     """
 
     def __init__(
@@ -39,19 +39,16 @@ class HumanLLMAgent(LLMAgent):
             f"The exit door is at {door_position}. "
             f"Impassable walls are at: {obstacles_str}.\n\n"
             "Each turn you receive an observation of your position and all other participants. "
-            "You MUST choose EXACTLY ONE action per turn — either move OR speak, never both:\n"
-            "- move_one_step(direction): move in one of 8 directions "
-            "(North, South, East, West, NorthEast, NorthWest, SouthEast, SouthWest)\n"
-            "- speak_nearby(message): say something to everyone within range\n\n"
-            "Call exactly one tool. Do not call both in the same turn."
+            "Call move_one_step(direction) to move one cell. "
+            "Direction must be one of: North, South, East, West, NorthEast, NorthWest, SouthEast, SouthWest. "
+            "Your goal is to reach the door and exit."
         )
 
         step_prompt = (
             f"Grid: {w}×{h} (x: 0–{w - 1}, y: 0–{h - 1}). "
             f"Exit door: {door_position}. "
             f"Walls: {obstacles_str}. "
-            "Your goal is to reach the door and leave the room. "
-            "Choose EXACTLY ONE action: move one step toward the door, or speak to nearby participants. Not both."
+            "Move toward the door."
         )
 
         super().__init__(
@@ -70,16 +67,13 @@ class HumanLLMAgent(LLMAgent):
         self.door_position = door_position
         self.obstacles = obstacles
         self.exited = False
-        self.last_speech: str | None = None
 
     def step(self):
-        self.last_speech = None
         obs = self.generate_obs()
         plan = self.reasoning.plan(obs=obs)
         self.apply_plan(plan)
 
     async def astep(self):
-        self.last_speech = None
         obs = await self.agenerate_obs()
         plan = await self.reasoning.aplan(prompt=self.step_prompt, obs=obs)
         await self.aapply_plan(plan)

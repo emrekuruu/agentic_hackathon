@@ -12,7 +12,7 @@ class EvaluationModel(Model):
     """Spatial simulation environment where every participant is an LLM agent.
 
     Agents are placed on a 2D grid. Each step they observe nearby agents
-    (bounded by vision_radius), then decide to move and/or speak.
+    (bounded by vision_radius), then decide to move.
     When an agent reaches door_position it is removed from the simulation.
     The simulation ends when all agents have exited or deadline is reached.
     """
@@ -34,7 +34,6 @@ class EvaluationModel(Model):
         self.obstacles: set[tuple[int, int]] = {tuple(o) for o in obstacles} if obstacles else set()
         self.current_step = 0
         self.position_history: list[dict] = []  # [{name: (x,y) | "exited"}, ...]
-        self.speech_history: list[dict] = []   # [{name: str | None}, ...]
         self._all_agent_names: list[str] = []
 
         for cfg in agent_configs:
@@ -73,19 +72,15 @@ class EvaluationModel(Model):
         self._check_door_exits()
         self.current_step += 1
 
-        # Record positions and speech for this step
+        # Record positions for this step
         active_agents = {a.name: a for a in self.agents}
         pos_frame: dict[str, tuple | str] = {}
-        speech_frame: dict[str, str | None] = {}
         for name in self._all_agent_names:
             if name in active_agents:
                 pos_frame[name] = active_agents[name].pos
-                speech_frame[name] = active_agents[name].last_speech
             else:
                 pos_frame[name] = "exited"
-                speech_frame[name] = None
         self.position_history.append(pos_frame)
-        self.speech_history.append(speech_frame)
 
         if not list(self.agents):
             print("\nAll agents have exited!")
