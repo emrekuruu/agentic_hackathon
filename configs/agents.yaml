@@ -6,6 +6,10 @@ environment:
   num_agents: 5
   random_seed: 42
   agent_name_prefix: "Agent"
+  fire:
+    num_initial_fires: 2
+    spread_probability: 0.18
+    random_seed: 42
   doors:
     - [9, 5]
     - [0, 4]

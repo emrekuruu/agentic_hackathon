@@ -52,6 +52,8 @@ def move_one_step(direction: str, agent: "LLMAgent") -> str:
         return f"Blocked — {new_pos} is occupied by {names}. Choose a different direction."
 
     agent.model.grid.move_agent(agent, new_pos)
+    if new_pos in getattr(agent.model, "fire_cells", set()):
+        return f"Moved {direction} to {new_pos}. WARNING: this cell is on fire and is lethal."
     return f"Moved {direction} to {new_pos}."
 
 

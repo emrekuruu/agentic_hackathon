@@ -19,6 +19,7 @@ def main():
         height=data["height"],
         door_positions=[tuple(d) for d in data["door_positions"]],
         obstacles=[tuple(o) for o in data.get("obstacles", [])],
+        fire_history=data.get("fire_history"),
     )
 
 

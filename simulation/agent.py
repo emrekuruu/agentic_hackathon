@@ -29,6 +29,11 @@ class HumanLLMAgent(LLMAgent):
 
         obstacles_str = ", ".join(str(o) for o in sorted(obstacles)) if obstacles else "none"
         doors_str = ", ".join(str(d) for d in sorted(door_positions))
+        fires_str = (
+            ", ".join(str(f) for f in sorted(model.fire_cells))
+            if getattr(model, "fire_cells", None)
+            else "none currently"
+        )
 
         system_prompt = (
             f"You are {name}, a human participant in a group simulation.\n"
@@ -36,7 +41,8 @@ class HumanLLMAgent(LLMAgent):
             f"The grid is {w} × {h}. Valid positions: x from 0 to {w - 1}, y from 0 to {h - 1}. "
             "You cannot move outside these bounds.\n"
             f"Exit doors are at: {doors_str}. Reach any one of them to exit. "
-            f"Impassable walls are at: {obstacles_str}.\n\n"
+            f"Impassable walls are at: {obstacles_str}. "
+            "Fires can spread over time. If you are on a fire cell, you die immediately.\n\n"
             "Each turn you receive an observation of your position and all other participants. "
             "Choose exactly one action:\n"
             "- move_one_step(direction): move one cell. "
@@ -49,7 +55,8 @@ class HumanLLMAgent(LLMAgent):
             f"Grid: {w}×{h} (x: 0–{w - 1}, y: 0–{h - 1}). "
             f"Exit doors: {doors_str}. "
             f"Walls: {obstacles_str}. "
-            "Move toward the nearest door, or stay_put() if you must wait."
+            f"Current fire cells: {fires_str}. "
+            "Avoid fire cells completely. Move toward the nearest door, or stay_put() if you must wait."
         )
 
         super().__init__(
@@ -69,12 +76,35 @@ class HumanLLMAgent(LLMAgent):
         self.obstacles = obstacles
         self.exited = False
 
+    def _build_step_prompt(self) -> str:
+        fire_cells = getattr(self.model, "fire_cells", set())
+        fires_str = ", ".join(str(f) for f in sorted(fire_cells)) if fire_cells else "none"
+        w = self.model.grid.width
+        h = self.model.grid.height
+        doors_str = ", ".join(str(d) for d in sorted(self.door_positions))
+        obstacles_str = ", ".join(str(o) for o in sorted(self.obstacles)) if self.obstacles else "none"
+        return (
+            f"Grid: {w}×{h} (x: 0–{w - 1}, y: 0–{h - 1}). "
+            f"Exit doors: {doors_str}. "
+            f"Walls: {obstacles_str}. "
+            f"Current fire cells: {fires_str}. "
+            "Avoid fire cells completely. Move toward the nearest door, or stay_put() if you must wait."
+        )
+
+    @staticmethod
+    def _inject_fire_into_obs(obs, fire_cells: set[tuple[int, int]]):
+        obs.self_state["fire_cells"] = sorted(list(fire_cells))
+        obs.self_state["hazard_rule"] = "Entering a fire cell causes death."
+        return obs
+
     def step(self):
         obs = self.generate_obs()
-        plan = self.reasoning.plan(obs=obs)
+        obs = self._inject_fire_into_obs(obs, getattr(self.model, "fire_cells", set()))
+        plan = self.reasoning.plan(obs=obs, prompt=self._build_step_prompt())
         self.apply_plan(plan)
 
     async def astep(self):
         obs = await self.agenerate_obs()
-        plan = await self.reasoning.aplan(prompt=self.step_prompt, obs=obs)
+        obs = self._inject_fire_into_obs(obs, getattr(self.model, "fire_cells", set()))
+        plan = await self.reasoning.aplan(prompt=self._build_step_prompt(), obs=obs)
         await self.aapply_plan(plan)

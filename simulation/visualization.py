@@ -3,6 +3,7 @@ from __future__ import annotations
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import matplotlib.patches as mpatches
+from matplotlib.colors import ListedColormap
 import numpy as np
 
 
@@ -15,6 +16,7 @@ def animate(
     height: int,
     door_positions: list[tuple[int, int]],
     obstacles: list[tuple[int, int]] | None = None,
+    fire_history: list[list[list[int]]] | None = None,
     interval_ms: int = 800,
 ):
     """
@@ -82,9 +84,23 @@ def animate(
         legend_patches.append(
             mpatches.Patch(facecolor="#2c2c54", edgecolor="#555577", label="Wall")
         )
+    if fire_history:
+        legend_patches.append(
+            mpatches.Patch(facecolor="#ff0000", edgecolor="#ff0000", label="Fire")
+        )
     ax.legend(handles=legend_patches, loc="upper right", facecolor="#0f3460", labelcolor="white")
 
     title = ax.set_title("", color="white", fontsize=13, pad=10)
+    fire_im = ax.imshow(
+        np.zeros((height, width), dtype=int),
+        origin="lower",
+        interpolation="nearest",
+        extent=(-0.5, width - 0.5, -0.5, height - 0.5),
+        cmap=ListedColormap([(0.0, 0.0, 0.0, 0.0), (1.0, 0.0, 0.0, 1.0)]),
+        vmin=0,
+        vmax=1,
+        zorder=4,
+    )
 
     # One scatter + label per agent
     scatters: dict = {}
@@ -119,7 +135,16 @@ def animate(
                 scatters[name].set_offsets(np.array([[x, y]]))
                 labels[name].set_position((x, y + 0.35))
 
-        return list(scatters.values()) + list(labels.values()) + [title]
+        frame_fires = []
+        if fire_history and frame < len(fire_history):
+            frame_fires = fire_history[frame]
+        fire_grid = np.zeros((height, width), dtype=int)
+        for fx, fy in frame_fires:
+            if 0 <= fx < width and 0 <= fy < height:
+                fire_grid[fy, fx] = 1
+        fire_im.set_data(fire_grid)
+
+        return list(scatters.values()) + list(labels.values()) + [title, fire_im]
 
     ani = animation.FuncAnimation(
         fig,

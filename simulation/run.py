@@ -56,6 +56,10 @@ def main():
     env = cfg["environment"]
     door_positions = [tuple(d) for d in env["doors"]]
     obstacles = [tuple(o) for o in env.get("obstacles", [])]
+    fire_cfg = env.get("fire", {})
+    num_initial_fires = int(fire_cfg.get("num_initial_fires", fire_cfg.get("num_fires", 0)))
+    fire_spread_probability = float(fire_cfg.get("spread_probability", 0.15))
+    fire_seed = fire_cfg.get("random_seed", env.get("random_seed"))
 
     agent_configs = cfg.get("agents")
     if not agent_configs:
@@ -74,6 +78,9 @@ def main():
         agent_configs=agent_configs,
         llm_model=env["llm_model"],
         obstacles=obstacles,
+        num_initial_fires=num_initial_fires,
+        fire_spread_probability=fire_spread_probability,
+        fire_seed=fire_seed,
     )
 
     while model.running:
@@ -98,6 +105,8 @@ def main():
         "door_positions": [list(d) for d in door_positions],
         "obstacles": [list(o) for o in obstacles],
         "history": model.position_history,
+        "status_history": model.status_history,
+        "fire_history": model.fire_history,
     }
     with open(TRAJECTORY_FILE, "w") as f:
         json.dump(trajectory, f)
