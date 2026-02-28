@@ -220,10 +220,21 @@ def _init():
         "current_step": 0,
         "config": _load_default_cfg(),
         "results": None,
+        "profiles": _load_profiles_map(),
     }
     for k, v in defaults.items():
         if k not in st.session_state:
             st.session_state[k] = v
+
+
+def _load_profiles_map() -> dict:
+    """Load profiles.json into a {name: profile} dict, if it exists."""
+    try:
+        with open("profiles.json") as f:
+            data = json.load(f)
+        return {p["name"]: p for p in data.get("profiles", [])}
+    except Exception:
+        return {}
 
 
 def _load_default_cfg() -> dict:
@@ -515,6 +526,24 @@ with st.sidebar:
 
     st.markdown('<div class="sec-title">👥 Agents</div>', unsafe_allow_html=True)
 
+    num_agents = st.number_input("Number of Agents", 1, 20, len(agents_cfg), key="num_agents")
+    if st.button("🎲 Generate Random Agents"):
+        from generate_profiles import generate_profiles, save_profiles
+
+        door = tuple(env["door"])
+        obstacles = [tuple(o) for o in env.get("obstacles", [])]
+        profiles, new_agents = generate_profiles(
+            n=num_agents,
+            grid_width=env["width"],
+            grid_height=env["height"],
+            door_position=door,
+            obstacles=obstacles,
+        )
+        save_profiles(profiles)
+        st.session_state.config["agents"] = new_agents
+        st.session_state.profiles = {p["name"]: p for p in profiles}
+        st.rerun()
+
     for i, agent in enumerate(agents_cfg):
         with st.expander(f"{agent['name']}  ({agent['role']})", expanded=False):
             c1, c2 = st.columns(2)
@@ -528,6 +557,36 @@ with st.sidebar:
             agent["personality"] = st.text_area(
                 "Personality", agent["personality"], height=68, key=f"a_pers_{i}"
             )
+            # ── Show attributes from generated profiles ──
+            prof_map: dict = st.session_state.get("profiles", {})
+            prof = prof_map.get(agent["name"])
+            if prof:
+                st.markdown(
+                    f"<span style='color:#7f8c8d;font-size:0.72rem;'>Age: {prof['age']} · {prof['description']}</span>",
+                    unsafe_allow_html=True,
+                )
+                with st.expander("📊 Attributes", expanded=False):
+                    for cat_name, cat_attrs in prof["attributes"].items():
+                        label = cat_name.replace("_", " ").title()
+                        st.markdown(
+                            f"<span style='color:#4fc3f7;font-size:0.7rem;font-weight:700;"
+                            f"text-transform:uppercase;letter-spacing:0.5px;'>{label}</span>",
+                            unsafe_allow_html=True,
+                        )
+                        for attr_key, attr_val in cat_attrs.items():
+                            pretty = attr_key.replace("_", " ").title()
+                            bar_color = "#2ecc71" if attr_val >= 65 else "#f39c12" if attr_val >= 35 else "#e74c3c"
+                            st.markdown(
+                                f"<div style='display:flex;align-items:center;gap:6px;margin:1px 0;font-size:0.72rem;'>"
+                                f"<span style='color:#aaa;min-width:130px;'>{pretty}</span>"
+                                f"<div style='flex:1;background:#0a1628;border-radius:3px;height:8px;'>"
+                                f"<div style='width:{attr_val}%;height:100%;background:{bar_color};border-radius:3px;'></div>"
+                                f"</div>"
+                                f"<span style='color:#ccc;font-family:monospace;min-width:24px;text-align:right;'>{attr_val}</span>"
+                                f"</div>",
+                                unsafe_allow_html=True,
+                            )
+
             if st.button("🗑 Remove", key=f"rm_{i}"):
                 agents_cfg.pop(i)
                 st.rerun()
