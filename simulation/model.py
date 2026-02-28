@@ -41,8 +41,8 @@ class EvaluationModel(Model):
             agent = HumanLLMAgent(
                 model=self,
                 name=cfg["name"],
-                role=cfg["role"],
-                personality=cfg["personality"],
+                role=cfg.get("role"),
+                personality=cfg.get("personality"),
                 llm_model=llm_model,
                 door_positions=self.door_positions,
                 obstacles=self.obstacles,

@@ -9,7 +9,6 @@ import simulation.tools  # registers @tool decorated functions  # noqa: F401
 class HumanLLMAgent(LLMAgent):
     """An LLM-powered agent that simulates a human participant.
 
-    Each agent has a unique personality and role encoded in its system prompt.
     Each step the agent observes nearby agents, reasons via CoT, and executes
     move tool calls. When it reaches any door it exits the simulation.
     """
@@ -18,8 +17,8 @@ class HumanLLMAgent(LLMAgent):
         self,
         model,
         name: str,
-        role: str,
-        personality: str,
+        role: str | None,
+        personality: str | None,
         llm_model: str,
         door_positions: set[tuple[int, int]],
         obstacles: set[tuple[int, int]],
@@ -33,8 +32,7 @@ class HumanLLMAgent(LLMAgent):
 
         system_prompt = (
             f"You are {name}, a human participant in a group simulation.\n"
-            f"Your role: {role}.\n"
-            f"Your personality: {personality}.\n\n"
+            "\n"
             f"The grid is {w} × {h}. Valid positions: x from 0 to {w - 1}, y from 0 to {h - 1}. "
             "You cannot move outside these bounds.\n"
             f"Exit doors are at: {doors_str}. Reach any one of them to exit. "

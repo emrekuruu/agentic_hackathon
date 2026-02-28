@@ -3,6 +3,9 @@ environment:
   height: 10
   deadline: 20
   llm_model: "openai/gpt-5.2"
+  num_agents: 5
+  random_seed: 42
+  agent_name_prefix: "Agent"
   doors:
     - [9, 5]
     - [0, 4]
@@ -10,19 +13,3 @@ environment:
     - [7, 6]
     - [8, 6]
     - [9, 6]
-
-agents:
-  - name: "Alice"
-    role: "domain expert"
-    personality: "Analytical, skeptical, and data-driven. Challenges assumptions and pushes for evidence."
-    position: [7, 7]
-
-  - name: "Bob"
-    role: "novice user"
-    personality: "Enthusiastic, curious, and open-minded. Asks lots of questions and is easily swayed by confident voices."
-    position: [7, 8]
-
-  - name: "Carol"
-    role: "facilitator"
-    personality: "Calm, neutral, and focused on consensus. Tries to bridge disagreements and keep the group on task."
-    position: [2, 7]
