@@ -1,0 +1,2734 @@
+{
+  "profiles": [
+    {
+      "id": "agent_01",
+      "name": "Sepehr Pourghannad",
+      "age": 25,
+      "description": "Sepehr Pourghannad is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 65
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 60,
+          "risk_taking": 40,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 50,
+          "altruism": 45,
+          "compliance": 30,
+          "herding_tendency": 25,
+          "cooperation": 60,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 55,
+          "agreeableness": 50,
+          "conscientiousness": 85,
+          "neuroticism": 30,
+          "openness_to_experience": 75,
+          "assertiveness": 60,
+          "stubbornness": 40,
+          "optimism": 65,
+          "impulsivity": 20
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 55,
+          "information_sharing": 40
+        },
+        "emotional_psychological": {
+          "empathy": 60,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 5,
+          "denial_tendency": 10
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 65,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_02",
+      "name": "Enrico Toniato",
+      "age": 25,
+      "description": "Enrico Toniato is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 80,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 75,
+          "analytical_thinking": 90,
+          "adaptability": 70,
+          "creativity": 65
+        },
+        "social_behavior": {
+          "leadership": 85,
+          "altruism": 60,
+          "compliance": 50,
+          "herding_tendency": 30,
+          "cooperation": 75,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 70,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 75,
+          "assertiveness": 80,
+          "stubbornness": 30,
+          "optimism": 70,
+          "impulsivity": 20
+        },
+        "communication": {
+          "vocal_tendency": 75,
+          "persuasiveness": 80,
+          "information_sharing": 65
+        },
+        "emotional_psychological": {
+          "empathy": 70,
+          "self_preservation_drive": 80,
+          "authority_trust": 60,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 25,
+          "emergency_training": 15,
+          "general_knowledge": 85
+        }
+      }
+    },
+    {
+      "id": "agent_03",
+      "name": "Maxim Gusev",
+      "age": 25,
+      "description": "Maxim Gusev is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 25,
+          "stress_tolerance": 80,
+          "emotional_volatility": 30,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 75,
+          "analytical_thinking": 90,
+          "adaptability": 80,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 80,
+          "altruism": 70,
+          "compliance": 50,
+          "herding_tendency": 40,
+          "cooperation": 75,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 60,
+          "conscientiousness": 85,
+          "neuroticism": 25,
+          "openness_to_experience": 80,
+          "assertiveness": 75,
+          "stubbornness": 30,
+          "optimism": 70,
+          "impulsivity": 40
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 75,
+          "information_sharing": 65
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 55,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 80
+        }
+      }
+    },
+    {
+      "id": "agent_04",
+      "name": "Simon Sukup",
+      "age": 25,
+      "description": "Simon Sukup is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 75,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 65,
+          "risk_taking": 60,
+          "analytical_thinking": 90,
+          "adaptability": 70,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 70,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 75,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 60,
+          "agreeableness": 65,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 85,
+          "assertiveness": 70,
+          "stubbornness": 40,
+          "optimism": 65,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 70,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 80,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 80
+        }
+      }
+    },
+    {
+      "id": "agent_05",
+      "name": "Elisabeth von Oswald",
+      "age": 25,
+      "description": "Elisabeth von Oswald is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 25,
+          "stress_tolerance": 70,
+          "emotional_volatility": 30,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 60,
+          "risk_taking": 70,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 85
+        },
+        "social_behavior": {
+          "leadership": 80,
+          "altruism": 60,
+          "compliance": 50,
+          "herding_tendency": 30,
+          "cooperation": 75,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 70,
+          "conscientiousness": 80,
+          "neuroticism": 30,
+          "openness_to_experience": 80,
+          "assertiveness": 75,
+          "stubbornness": 30,
+          "optimism": 70,
+          "impulsivity": 25
+        },
+        "communication": {
+          "vocal_tendency": 70,
+          "persuasiveness": 75,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_06",
+      "name": "Mehrshad Mirmohammadi",
+      "age": 25,
+      "description": "Mehrshad Mirmohammadi is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 75,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 90,
+          "situational_awareness": 60,
+          "risk_taking": 80,
+          "analytical_thinking": 95,
+          "adaptability": 70,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 70,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 35,
+          "agreeableness": 55,
+          "conscientiousness": 85,
+          "neuroticism": 20,
+          "openness_to_experience": 80,
+          "assertiveness": 70,
+          "stubbornness": 50,
+          "optimism": 65,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 65,
+          "information_sharing": 55
+        },
+        "emotional_psychological": {
+          "empathy": 60,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 85
+        }
+      }
+    },
+    {
+      "id": "agent_07",
+      "name": "Michal Tesnar",
+      "age": 25,
+      "description": "Michal Tesnar is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 40,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 50,
+          "risk_taking": 70,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 85
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 65,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 55,
+          "agreeableness": 60,
+          "conscientiousness": 75,
+          "neuroticism": 30,
+          "openness_to_experience": 80,
+          "assertiveness": 70,
+          "stubbornness": 40,
+          "optimism": 70,
+          "impulsivity": 25
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 65,
+          "information_sharing": 55
+        },
+        "emotional_psychological": {
+          "empathy": 60,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_08",
+      "name": "Suter Gabriel",
+      "age": 25,
+      "description": "Suter Gabriel is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 85,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 75
+        },
+        "decision_making": {
+          "decision_speed": 90,
+          "situational_awareness": 70,
+          "risk_taking": 80,
+          "analytical_thinking": 95,
+          "adaptability": 80,
+          "creativity": 85
+        },
+        "social_behavior": {
+          "leadership": 90,
+          "altruism": 70,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 75,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 70,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 85,
+          "assertiveness": 90,
+          "stubbornness": 50,
+          "optimism": 80,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 75,
+          "persuasiveness": 80,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 70,
+          "self_preservation_drive": 75,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 85
+        }
+      }
+    },
+    {
+      "id": "agent_09",
+      "name": "Nathan Ordonez",
+      "age": 25,
+      "description": "Nathan Ordonez is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 75,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 70,
+          "analytical_thinking": 90,
+          "adaptability": 80,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 80,
+          "altruism": 60,
+          "compliance": 50,
+          "herding_tendency": 30,
+          "cooperation": 70,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 65,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 75,
+          "assertiveness": 80,
+          "stubbornness": 40,
+          "optimism": 70,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 70,
+          "information_sharing": 55
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 75,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 80
+        }
+      }
+    },
+    {
+      "id": "agent_10",
+      "name": "Tianjian Yi",
+      "age": 25,
+      "description": "Tianjian Yi is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 40,
+          "freeze_tendency": 25,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 50,
+          "risk_taking": 60,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 85
+        },
+        "social_behavior": {
+          "leadership": 65,
+          "altruism": 55,
+          "compliance": 40,
+          "herding_tendency": 20,
+          "cooperation": 70,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 45,
+          "agreeableness": 60,
+          "conscientiousness": 75,
+          "neuroticism": 35,
+          "openness_to_experience": 85,
+          "assertiveness": 70,
+          "stubbornness": 40,
+          "optimism": 65,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 70,
+          "information_sharing": 65
+        },
+        "emotional_psychological": {
+          "empathy": 60,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 65,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_11",
+      "name": "Avi",
+      "age": 25,
+      "description": "Avi is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 40,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 55,
+          "risk_taking": 75,
+          "analytical_thinking": 90,
+          "adaptability": 80,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 80,
+          "altruism": 60,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 70,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 65,
+          "conscientiousness": 75,
+          "neuroticism": 30,
+          "openness_to_experience": 80,
+          "assertiveness": 75,
+          "stubbornness": 50,
+          "optimism": 70,
+          "impulsivity": 40
+        },
+        "communication": {
+          "vocal_tendency": 65,
+          "persuasiveness": 70,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 80
+        }
+      }
+    },
+    {
+      "id": "agent_12",
+      "name": "Yiwen Zhao",
+      "age": 25,
+      "description": "Yiwen Zhao is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 25,
+          "stress_tolerance": 70,
+          "emotional_volatility": 30,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 50,
+          "risk_taking": 40,
+          "analytical_thinking": 90,
+          "adaptability": 70,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 65,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 60,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 55,
+          "conscientiousness": 85,
+          "neuroticism": 25,
+          "openness_to_experience": 70,
+          "assertiveness": 75,
+          "stubbornness": 30,
+          "optimism": 60,
+          "impulsivity": 20
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 60,
+          "information_sharing": 55
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 60,
+          "pain_tolerance": 55
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_13",
+      "name": "Adri\u00e1n Mart\u00ednez L\u00f3pez",
+      "age": 25,
+      "description": "Adri\u00e1n Mart\u00ednez L\u00f3pez is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 80,
+          "emotional_volatility": 25,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 40,
+          "analytical_thinking": 90,
+          "adaptability": 70,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 65,
+          "altruism": 50,
+          "compliance": 30,
+          "herding_tendency": 20,
+          "cooperation": 60,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 55,
+          "conscientiousness": 85,
+          "neuroticism": 20,
+          "openness_to_experience": 75,
+          "assertiveness": 70,
+          "stubbornness": 30,
+          "optimism": 65,
+          "impulsivity": 20
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 70,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 60,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 65,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 15,
+          "emergency_training": 10,
+          "general_knowledge": 85
+        }
+      }
+    },
+    {
+      "id": "agent_14",
+      "name": "Elizabeth",
+      "age": 25,
+      "description": "Elizabeth is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 75,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 80,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 80
+        },
+        "social_behavior": {
+          "leadership": 70,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 20,
+          "cooperation": 65,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 60,
+          "conscientiousness": 75,
+          "neuroticism": 25,
+          "openness_to_experience": 80,
+          "assertiveness": 80,
+          "stubbornness": 30,
+          "optimism": 70,
+          "impulsivity": 40
+        },
+        "communication": {
+          "vocal_tendency": 70,
+          "persuasiveness": 75,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 65,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_15",
+      "name": "Bivek Panthi",
+      "age": 25,
+      "description": "Bivek Panthi is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 40,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 50,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 70,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 50,
+          "agreeableness": 60,
+          "conscientiousness": 80,
+          "neuroticism": 30,
+          "openness_to_experience": 75,
+          "assertiveness": 65,
+          "stubbornness": 40,
+          "optimism": 65,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 70,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 55,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 65,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_16",
+      "name": "Bianca Milczarek",
+      "age": 25,
+      "description": "Bianca Milczarek is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 40,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 65,
+          "situational_awareness": 55,
+          "risk_taking": 50,
+          "analytical_thinking": 60,
+          "adaptability": 75,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 65,
+          "compliance": 50,
+          "herding_tendency": 40,
+          "cooperation": 80,
+          "competitiveness": 55
+        },
+        "general_personality": {
+          "introversion": 45,
+          "agreeableness": 70,
+          "conscientiousness": 65,
+          "neuroticism": 35,
+          "openness_to_experience": 75,
+          "assertiveness": 60,
+          "stubbornness": 30,
+          "optimism": 65,
+          "impulsivity": 40
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 65,
+          "information_sharing": 70
+        },
+        "emotional_psychological": {
+          "empathy": 75,
+          "self_preservation_drive": 60,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 55,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 25,
+          "emergency_training": 15,
+          "general_knowledge": 65
+        }
+      }
+    },
+    {
+      "id": "agent_17",
+      "name": "Andreas Schlaginhaufen",
+      "age": 25,
+      "description": "Andreas Schlaginhaufen is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 50,
+          "risk_taking": 40,
+          "analytical_thinking": 90,
+          "adaptability": 70,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 65,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 50,
+          "agreeableness": 60,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 75,
+          "assertiveness": 70,
+          "stubbornness": 30,
+          "optimism": 65,
+          "impulsivity": 25
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 65,
+          "information_sharing": 55
+        },
+        "emotional_psychological": {
+          "empathy": 60,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_18",
+      "name": "Emre Kuru",
+      "age": 25,
+      "description": "Emre Kuru is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 80,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 70,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 80
+        },
+        "social_behavior": {
+          "leadership": 65,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 70,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 55,
+          "agreeableness": 60,
+          "conscientiousness": 85,
+          "neuroticism": 30,
+          "openness_to_experience": 80,
+          "assertiveness": 75,
+          "stubbornness": 40,
+          "optimism": 70,
+          "impulsivity": 20
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 65,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 60,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 80
+        }
+      }
+    },
+    {
+      "id": "agent_19",
+      "name": "Anthony Gerardo Giuliano",
+      "age": 25,
+      "description": "Anthony Gerardo Giuliano is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 80,
+          "emotional_volatility": 40,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 70,
+          "risk_taking": 75,
+          "analytical_thinking": 90,
+          "adaptability": 80,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 85,
+          "altruism": 60,
+          "compliance": 40,
+          "herding_tendency": 35,
+          "cooperation": 70,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 65,
+          "conscientiousness": 80,
+          "neuroticism": 30,
+          "openness_to_experience": 80,
+          "assertiveness": 75,
+          "stubbornness": 50,
+          "optimism": 70,
+          "impulsivity": 40
+        },
+        "communication": {
+          "vocal_tendency": 70,
+          "persuasiveness": 80,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 55,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 25
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_20",
+      "name": "Guillermo Llopis",
+      "age": 25,
+      "description": "Guillermo Llopis is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 75,
+          "emotional_volatility": 40,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 50,
+          "risk_taking": 80,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 80
+        },
+        "social_behavior": {
+          "leadership": 85,
+          "altruism": 70,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 75,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 45,
+          "agreeableness": 70,
+          "conscientiousness": 80,
+          "neuroticism": 30,
+          "openness_to_experience": 85,
+          "assertiveness": 80,
+          "stubbornness": 40,
+          "optimism": 75,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 75,
+          "information_sharing": 65
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_21",
+      "name": "Sandhanakrishnan Ravichandran",
+      "age": 25,
+      "description": "Sandhanakrishnan Ravichandran is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 65,
+          "emotional_volatility": 40,
+          "freeze_tendency": 25,
+          "emotional_recovery_speed": 55
+        },
+        "decision_making": {
+          "decision_speed": 70,
+          "situational_awareness": 60,
+          "risk_taking": 50,
+          "analytical_thinking": 80,
+          "adaptability": 75,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 50,
+          "altruism": 45,
+          "compliance": 40,
+          "herding_tendency": 35,
+          "cooperation": 60,
+          "competitiveness": 75
+        },
+        "general_personality": {
+          "introversion": 55,
+          "agreeableness": 50,
+          "conscientiousness": 70,
+          "neuroticism": 30,
+          "openness_to_experience": 65,
+          "assertiveness": 60,
+          "stubbornness": 40,
+          "optimism": 50,
+          "impulsivity": 35
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 65,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 55,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 50
+        }
+      }
+    },
+    {
+      "id": "agent_22",
+      "name": "Gianlorenzo Occhipinti",
+      "age": 25,
+      "description": "Gianlorenzo Occhipinti is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 40,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 60,
+          "risk_taking": 75,
+          "analytical_thinking": 85,
+          "adaptability": 70,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 85,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 70,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 60,
+          "conscientiousness": 75,
+          "neuroticism": 30,
+          "openness_to_experience": 80,
+          "assertiveness": 80,
+          "stubbornness": 50,
+          "optimism": 70,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 70,
+          "persuasiveness": 80,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 60,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 30
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_23",
+      "name": "Reza Hosseini",
+      "age": 25,
+      "description": "Reza Hosseini is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 80,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 75,
+          "situational_awareness": 60,
+          "risk_taking": 50,
+          "analytical_thinking": 90,
+          "adaptability": 70,
+          "creativity": 80
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 70,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 60,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 70,
+          "assertiveness": 65,
+          "stubbornness": 40,
+          "optimism": 60,
+          "impulsivity": 20
+        },
+        "communication": {
+          "vocal_tendency": 55,
+          "persuasiveness": 65,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 50,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 30
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 60,
+          "pain_tolerance": 55
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_24",
+      "name": "Nilson Kufus",
+      "age": 25,
+      "description": "Nilson Kufus is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 50,
+          "risk_taking": 70,
+          "analytical_thinking": 90,
+          "adaptability": 65,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 40,
+          "compliance": 30,
+          "herding_tendency": 20,
+          "cooperation": 55,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 50,
+          "conscientiousness": 80,
+          "neuroticism": 30,
+          "openness_to_experience": 70,
+          "assertiveness": 65,
+          "stubbornness": 40,
+          "optimism": 60,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 55,
+          "information_sharing": 45
+        },
+        "emotional_psychological": {
+          "empathy": 50,
+          "self_preservation_drive": 70,
+          "authority_trust": 40,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 80
+        }
+      }
+    },
+    {
+      "id": "agent_25",
+      "name": "Ralf Boltshauser",
+      "age": 25,
+      "description": "Ralf Boltshauser is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 75,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 70,
+          "analytical_thinking": 90,
+          "adaptability": 80,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 80,
+          "altruism": 60,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 75,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 70,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 85,
+          "assertiveness": 75,
+          "stubbornness": 30,
+          "optimism": 80,
+          "impulsivity": 40
+        },
+        "communication": {
+          "vocal_tendency": 70,
+          "persuasiveness": 75,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_26",
+      "name": "Jan Tempus",
+      "age": 25,
+      "description": "Jan Tempus is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 80,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 25,
+          "analytical_thinking": 90,
+          "adaptability": 65,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 50,
+          "altruism": 40,
+          "compliance": 30,
+          "herding_tendency": 25,
+          "cooperation": 55,
+          "competitiveness": 70
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 60,
+          "conscientiousness": 85,
+          "neuroticism": 20,
+          "openness_to_experience": 70,
+          "assertiveness": 65,
+          "stubbornness": 30,
+          "optimism": 55,
+          "impulsivity": 25
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 60,
+          "information_sharing": 45
+        },
+        "emotional_psychological": {
+          "empathy": 50,
+          "self_preservation_drive": 60,
+          "authority_trust": 40,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_27",
+      "name": "Amin Oudrhiri",
+      "age": 25,
+      "description": "Amin Oudrhiri is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 80,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 75,
+          "analytical_thinking": 90,
+          "adaptability": 80,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 75,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 65,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 60,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 75,
+          "assertiveness": 70,
+          "stubbornness": 35,
+          "optimism": 65,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 70,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 55,
+          "self_preservation_drive": 70,
+          "authority_trust": 40,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_28",
+      "name": "Mauro Pellonara",
+      "age": 25,
+      "description": "Mauro Pellonara is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 80,
+          "emotional_volatility": 25,
+          "freeze_tendency": 10,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 60,
+          "risk_taking": 70,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 80
+        },
+        "social_behavior": {
+          "leadership": 85,
+          "altruism": 60,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 70,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 65,
+          "conscientiousness": 85,
+          "neuroticism": 20,
+          "openness_to_experience": 80,
+          "assertiveness": 75,
+          "stubbornness": 30,
+          "optimism": 70,
+          "impulsivity": 25
+        },
+        "communication": {
+          "vocal_tendency": 70,
+          "persuasiveness": 80,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 75,
+          "authority_trust": 50,
+          "claustrophobia": 10,
+          "prior_trauma": 5,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 65,
+          "pain_tolerance": 55
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_29",
+      "name": "Sotiris Karapiperis",
+      "age": 25,
+      "description": "Sotiris Karapiperis is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 75,
+          "situational_awareness": 50,
+          "risk_taking": 60,
+          "analytical_thinking": 85,
+          "adaptability": 70,
+          "creativity": 80
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 25,
+          "cooperation": 70,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 45,
+          "agreeableness": 60,
+          "conscientiousness": 75,
+          "neuroticism": 30,
+          "openness_to_experience": 80,
+          "assertiveness": 70,
+          "stubbornness": 40,
+          "optimism": 65,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 65,
+          "information_sharing": 55
+        },
+        "emotional_psychological": {
+          "empathy": 60,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 65,
+          "pain_tolerance": 70
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_30",
+      "name": "Federico Gossi",
+      "age": 25,
+      "description": "Federico Gossi is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 25,
+          "stress_tolerance": 80,
+          "emotional_volatility": 30,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 90,
+          "situational_awareness": 60,
+          "risk_taking": 80,
+          "analytical_thinking": 85,
+          "adaptability": 75,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 90,
+          "altruism": 60,
+          "compliance": 50,
+          "herding_tendency": 40,
+          "cooperation": 70,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 65,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 75,
+          "assertiveness": 85,
+          "stubbornness": 30,
+          "optimism": 80,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 70,
+          "persuasiveness": 75,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 15,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_31",
+      "name": "Daria Godorozha",
+      "age": 25,
+      "description": "Daria Godorozha is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 25,
+          "stress_tolerance": 80,
+          "emotional_volatility": 30,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 75,
+          "risk_taking": 40,
+          "analytical_thinking": 90,
+          "adaptability": 70,
+          "creativity": 65
+        },
+        "social_behavior": {
+          "leadership": 90,
+          "altruism": 60,
+          "compliance": 50,
+          "herding_tendency": 30,
+          "cooperation": 75,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 70,
+          "conscientiousness": 85,
+          "neuroticism": 20,
+          "openness_to_experience": 75,
+          "assertiveness": 80,
+          "stubbornness": 40,
+          "optimism": 70,
+          "impulsivity": 25
+        },
+        "communication": {
+          "vocal_tendency": 70,
+          "persuasiveness": 75,
+          "information_sharing": 60
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 80
+        }
+      }
+    },
+    {
+      "id": "agent_32",
+      "name": "Mirto Randellini",
+      "age": 25,
+      "description": "Mirto Randellini is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 75,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 60,
+          "risk_taking": 50,
+          "analytical_thinking": 90,
+          "adaptability": 70,
+          "creativity": 65
+        },
+        "social_behavior": {
+          "leadership": 75,
+          "altruism": 40,
+          "compliance": 30,
+          "herding_tendency": 20,
+          "cooperation": 70,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 60,
+          "conscientiousness": 85,
+          "neuroticism": 25,
+          "openness_to_experience": 70,
+          "assertiveness": 75,
+          "stubbornness": 30,
+          "optimism": 65,
+          "impulsivity": 40
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 70,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 55,
+          "self_preservation_drive": 65,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 60,
+          "pain_tolerance": 55
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_33",
+      "name": "Martina Manno",
+      "age": 25,
+      "description": "Martina Manno is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 65,
+          "situational_awareness": 50,
+          "risk_taking": 40,
+          "analytical_thinking": 85,
+          "adaptability": 75,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 55,
+          "altruism": 60,
+          "compliance": 50,
+          "herding_tendency": 30,
+          "cooperation": 65,
+          "competitiveness": 60
+        },
+        "general_personality": {
+          "introversion": 60,
+          "agreeableness": 70,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 75,
+          "assertiveness": 55,
+          "stubbornness": 45,
+          "optimism": 50,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 60,
+          "information_sharing": 55
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_34",
+      "name": "Shivram Sambhus",
+      "age": 25,
+      "description": "Shivram Sambhus is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 65,
+          "risk_taking": 50,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 70,
+          "altruism": 60,
+          "compliance": 50,
+          "herding_tendency": 40,
+          "cooperation": 75,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 65,
+          "conscientiousness": 80,
+          "neuroticism": 30,
+          "openness_to_experience": 75,
+          "assertiveness": 70,
+          "stubbornness": 40,
+          "optimism": 65,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 70,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 55,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 80
+        }
+      }
+    },
+    {
+      "id": "agent_35",
+      "name": "Jekaterina Jaroslavceva",
+      "age": 25,
+      "description": "Jekaterina Jaroslavceva is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 25,
+          "freeze_tendency": 40,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 50,
+          "risk_taking": 60,
+          "analytical_thinking": 85,
+          "adaptability": 75,
+          "creativity": 90
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 55,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 70,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 65,
+          "conscientiousness": 75,
+          "neuroticism": 30,
+          "openness_to_experience": 80,
+          "assertiveness": 70,
+          "stubbornness": 50,
+          "optimism": 65,
+          "impulsivity": 40
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 70,
+          "information_sharing": 55
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 25
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 65
+        }
+      }
+    },
+    {
+      "id": "agent_36",
+      "name": "Sara Rutz",
+      "age": 25,
+      "description": "Sara Rutz is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 40,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 75,
+          "situational_awareness": 65,
+          "risk_taking": 80,
+          "analytical_thinking": 85,
+          "adaptability": 70,
+          "creativity": 90
+        },
+        "social_behavior": {
+          "leadership": 85,
+          "altruism": 60,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 75,
+          "competitiveness": 80
+        },
+        "general_personality": {
+          "introversion": 50,
+          "agreeableness": 70,
+          "conscientiousness": 80,
+          "neuroticism": 30,
+          "openness_to_experience": 85,
+          "assertiveness": 75,
+          "stubbornness": 40,
+          "optimism": 70,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 75,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 70,
+          "self_preservation_drive": 60,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 65,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 25,
+          "emergency_training": 15,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_37",
+      "name": "Liam Thate",
+      "age": 25,
+      "description": "Liam Thate is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 20,
+          "stress_tolerance": 70,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 75,
+          "situational_awareness": 55,
+          "risk_taking": 40,
+          "analytical_thinking": 90,
+          "adaptability": 65,
+          "creativity": 80
+        },
+        "social_behavior": {
+          "leadership": 50,
+          "altruism": 30,
+          "compliance": 40,
+          "herding_tendency": 25,
+          "cooperation": 60,
+          "competitiveness": 70
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 50,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 70,
+          "assertiveness": 60,
+          "stubbornness": 30,
+          "optimism": 55,
+          "impulsivity": 20
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 55,
+          "information_sharing": 45
+        },
+        "emotional_psychological": {
+          "empathy": 40,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 60,
+          "pain_tolerance": 50
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_38",
+      "name": "Dimitrios Prasakis",
+      "age": 25,
+      "description": "Dimitrios Prasakis is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 40,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 50,
+          "risk_taking": 80,
+          "analytical_thinking": 90,
+          "adaptability": 75,
+          "creativity": 70
+        },
+        "social_behavior": {
+          "leadership": 90,
+          "altruism": 50,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 65,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 35,
+          "agreeableness": 60,
+          "conscientiousness": 80,
+          "neuroticism": 25,
+          "openness_to_experience": 70,
+          "assertiveness": 85,
+          "stubbornness": 55,
+          "optimism": 75,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 75,
+          "persuasiveness": 80,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_39",
+      "name": "Alkinoos Sarioglou",
+      "age": 25,
+      "description": "Alkinoos Sarioglou is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 25,
+          "stress_tolerance": 75,
+          "emotional_volatility": 30,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 70,
+          "risk_taking": 80,
+          "analytical_thinking": 90,
+          "adaptability": 80,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 85,
+          "altruism": 70,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 80,
+          "competitiveness": 90
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 75,
+          "conscientiousness": 85,
+          "neuroticism": 25,
+          "openness_to_experience": 80,
+          "assertiveness": 80,
+          "stubbornness": 40,
+          "optimism": 70,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 70,
+          "persuasiveness": 80,
+          "information_sharing": 65
+        },
+        "emotional_psychological": {
+          "empathy": 75,
+          "self_preservation_drive": 70,
+          "authority_trust": 60,
+          "claustrophobia": 15,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 80,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 85
+        }
+      }
+    },
+    {
+      "id": "agent_40",
+      "name": "Wiona Gl\u00e4nzer",
+      "age": 25,
+      "description": "Wiona Gl\u00e4nzer is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 25,
+          "stress_tolerance": 75,
+          "emotional_volatility": 30,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 80,
+          "situational_awareness": 60,
+          "risk_taking": 40,
+          "analytical_thinking": 90,
+          "adaptability": 70,
+          "creativity": 65
+        },
+        "social_behavior": {
+          "leadership": 50,
+          "altruism": 40,
+          "compliance": 30,
+          "herding_tendency": 20,
+          "cooperation": 60,
+          "competitiveness": 75
+        },
+        "general_personality": {
+          "introversion": 60,
+          "agreeableness": 55,
+          "conscientiousness": 85,
+          "neuroticism": 25,
+          "openness_to_experience": 70,
+          "assertiveness": 65,
+          "stubbornness": 30,
+          "optimism": 50,
+          "impulsivity": 20
+        },
+        "communication": {
+          "vocal_tendency": 50,
+          "persuasiveness": 60,
+          "information_sharing": 45
+        },
+        "emotional_psychological": {
+          "empathy": 55,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 30,
+          "prior_trauma": 10,
+          "denial_tendency": 20
+        },
+        "physical": {
+          "mobility": 70,
+          "strength": 60,
+          "pain_tolerance": 65
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 75
+        }
+      }
+    },
+    {
+      "id": "agent_41",
+      "name": "Thomas Bollenbach",
+      "age": 25,
+      "description": "Thomas Bollenbach is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 70,
+          "emotional_volatility": 25,
+          "freeze_tendency": 20,
+          "emotional_recovery_speed": 60
+        },
+        "decision_making": {
+          "decision_speed": 75,
+          "situational_awareness": 65,
+          "risk_taking": 50,
+          "analytical_thinking": 85,
+          "adaptability": 70,
+          "creativity": 60
+        },
+        "social_behavior": {
+          "leadership": 60,
+          "altruism": 40,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 50,
+          "competitiveness": 70
+        },
+        "general_personality": {
+          "introversion": 45,
+          "agreeableness": 50,
+          "conscientiousness": 80,
+          "neuroticism": 30,
+          "openness_to_experience": 55,
+          "assertiveness": 65,
+          "stubbornness": 40,
+          "optimism": 50,
+          "impulsivity": 25
+        },
+        "communication": {
+          "vocal_tendency": 55,
+          "persuasiveness": 60,
+          "information_sharing": 50
+        },
+        "emotional_psychological": {
+          "empathy": 50,
+          "self_preservation_drive": 70,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 65,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 10,
+          "general_knowledge": 70
+        }
+      }
+    },
+    {
+      "id": "agent_42",
+      "name": "Damiano Amatruda",
+      "age": 25,
+      "description": "Damiano Amatruda is a 25-year-old hackathon participant who is fit.",
+      "attributes": {
+        "stress_response": {
+          "panic_susceptibility": 30,
+          "stress_tolerance": 80,
+          "emotional_volatility": 20,
+          "freeze_tendency": 15,
+          "emotional_recovery_speed": 70
+        },
+        "decision_making": {
+          "decision_speed": 85,
+          "situational_awareness": 70,
+          "risk_taking": 75,
+          "analytical_thinking": 90,
+          "adaptability": 80,
+          "creativity": 75
+        },
+        "social_behavior": {
+          "leadership": 70,
+          "altruism": 60,
+          "compliance": 40,
+          "herding_tendency": 30,
+          "cooperation": 75,
+          "competitiveness": 85
+        },
+        "general_personality": {
+          "introversion": 40,
+          "agreeableness": 65,
+          "conscientiousness": 85,
+          "neuroticism": 25,
+          "openness_to_experience": 80,
+          "assertiveness": 75,
+          "stubbornness": 40,
+          "optimism": 70,
+          "impulsivity": 30
+        },
+        "communication": {
+          "vocal_tendency": 60,
+          "persuasiveness": 70,
+          "information_sharing": 55
+        },
+        "emotional_psychological": {
+          "empathy": 65,
+          "self_preservation_drive": 80,
+          "authority_trust": 50,
+          "claustrophobia": 20,
+          "prior_trauma": 10,
+          "denial_tendency": 15
+        },
+        "physical": {
+          "mobility": 75,
+          "strength": 70,
+          "pain_tolerance": 60
+        },
+        "knowledge_preparation": {
+          "environment_familiarity": 20,
+          "emergency_training": 15,
+          "general_knowledge": 80
+        }
+      }
+    }
+  ]
+}
