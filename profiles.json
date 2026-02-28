@@ -1,0 +1,654 @@
+{
+    "profiles": [
+      {
+        "id": "agent_01",
+        "name": "Marcus Webb",
+        "age": 34,
+        "description": "Former military officer, now a corporate security consultant. Calm under fire, trained in emergency protocols, physically fit. Natural leader who takes command instinctively but can be rigid in his approach.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 12,
+            "stress_tolerance": 92,
+            "emotional_volatility": 15,
+            "freeze_tendency": 5,
+            "emotional_recovery_speed": 88
+          },
+          "decision_making": {
+            "decision_speed": 82,
+            "situational_awareness": 90,
+            "risk_taking": 65,
+            "analytical_thinking": 78,
+            "adaptability": 60,
+            "creativity": 45
+          },
+          "social_behavior": {
+            "leadership": 95,
+            "altruism": 70,
+            "compliance": 55,
+            "herding_tendency": 10,
+            "cooperation": 72,
+            "competitiveness": 40
+          },
+          "general_personality": {
+            "introversion": 25,
+            "agreeableness": 50,
+            "conscientiousness": 88,
+            "neuroticism": 15,
+            "openness_to_experience": 45,
+            "assertiveness": 90,
+            "stubbornness": 72,
+            "optimism": 65,
+            "impulsivity": 30
+          },
+          "communication": {
+            "vocal_tendency": 85,
+            "persuasiveness": 80,
+            "information_sharing": 78
+          },
+          "emotional_psychological": {
+            "empathy": 50,
+            "self_preservation_drive": 70,
+            "authority_trust": 60,
+            "claustrophobia": 8,
+            "prior_trauma": 65,
+            "denial_tendency": 5
+          },
+          "physical": {
+            "mobility": 88,
+            "strength": 85,
+            "pain_tolerance": 82
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 55,
+            "emergency_training": 95,
+            "general_knowledge": 90
+          }
+        }
+      },
+      {
+        "id": "agent_02",
+        "name": "Elena Vasquez",
+        "age": 28,
+        "description": "Graduate student in psychology, anxious by nature but highly empathetic and socially attuned. Tends to freeze initially but recovers through concern for others. Physically average, no emergency training.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 68,
+            "stress_tolerance": 40,
+            "emotional_volatility": 72,
+            "freeze_tendency": 65,
+            "emotional_recovery_speed": 50
+          },
+          "decision_making": {
+            "decision_speed": 35,
+            "situational_awareness": 60,
+            "risk_taking": 25,
+            "analytical_thinking": 75,
+            "adaptability": 55,
+            "creativity": 65
+          },
+          "social_behavior": {
+            "leadership": 20,
+            "altruism": 88,
+            "compliance": 78,
+            "herding_tendency": 62,
+            "cooperation": 85,
+            "competitiveness": 12
+          },
+          "general_personality": {
+            "introversion": 65,
+            "agreeableness": 88,
+            "conscientiousness": 72,
+            "neuroticism": 75,
+            "openness_to_experience": 80,
+            "assertiveness": 25,
+            "stubbornness": 30,
+            "optimism": 45,
+            "impulsivity": 22
+          },
+          "communication": {
+            "vocal_tendency": 40,
+            "persuasiveness": 55,
+            "information_sharing": 70
+          },
+          "emotional_psychological": {
+            "empathy": 92,
+            "self_preservation_drive": 45,
+            "authority_trust": 72,
+            "claustrophobia": 48,
+            "prior_trauma": 20,
+            "denial_tendency": 30
+          },
+          "physical": {
+            "mobility": 55,
+            "strength": 35,
+            "pain_tolerance": 40
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 30,
+            "emergency_training": 10,
+            "general_knowledge": 50
+          }
+        }
+      },
+      {
+        "id": "agent_03",
+        "name": "Dave Kowalski",
+        "age": 52,
+        "description": "Construction foreman with decades of worksite experience. Tough, practical, and no-nonsense. Low empathy for panic but will physically help people move. Bad knees limit his mobility. Deeply skeptical of authority.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 20,
+            "stress_tolerance": 80,
+            "emotional_volatility": 25,
+            "freeze_tendency": 8,
+            "emotional_recovery_speed": 75
+          },
+          "decision_making": {
+            "decision_speed": 78,
+            "situational_awareness": 72,
+            "risk_taking": 70,
+            "analytical_thinking": 55,
+            "adaptability": 50,
+            "creativity": 60
+          },
+          "social_behavior": {
+            "leadership": 65,
+            "altruism": 55,
+            "compliance": 25,
+            "herding_tendency": 15,
+            "cooperation": 50,
+            "competitiveness": 60
+          },
+          "general_personality": {
+            "introversion": 40,
+            "agreeableness": 32,
+            "conscientiousness": 70,
+            "neuroticism": 22,
+            "openness_to_experience": 30,
+            "assertiveness": 85,
+            "stubbornness": 80,
+            "optimism": 50,
+            "impulsivity": 45
+          },
+          "communication": {
+            "vocal_tendency": 75,
+            "persuasiveness": 60,
+            "information_sharing": 55
+          },
+          "emotional_psychological": {
+            "empathy": 30,
+            "self_preservation_drive": 75,
+            "authority_trust": 18,
+            "claustrophobia": 15,
+            "prior_trauma": 40,
+            "denial_tendency": 35
+          },
+          "physical": {
+            "mobility": 42,
+            "strength": 78,
+            "pain_tolerance": 80
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 45,
+            "emergency_training": 55,
+            "general_knowledge": 65
+          }
+        }
+      },
+      {
+        "id": "agent_04",
+        "name": "Aisha Okonkwo",
+        "age": 41,
+        "description": "ER nurse and mother of three. Exceptional under medical emergencies, calm and methodical. High altruism driven by professional instinct. Will prioritize helping the injured over her own escape. Physically resilient but not fast.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 18,
+            "stress_tolerance": 88,
+            "emotional_volatility": 20,
+            "freeze_tendency": 5,
+            "emotional_recovery_speed": 85
+          },
+          "decision_making": {
+            "decision_speed": 75,
+            "situational_awareness": 82,
+            "risk_taking": 50,
+            "analytical_thinking": 80,
+            "adaptability": 78,
+            "creativity": 62
+          },
+          "social_behavior": {
+            "leadership": 72,
+            "altruism": 95,
+            "compliance": 65,
+            "herding_tendency": 18,
+            "cooperation": 88,
+            "competitiveness": 10
+          },
+          "general_personality": {
+            "introversion": 35,
+            "agreeableness": 75,
+            "conscientiousness": 90,
+            "neuroticism": 25,
+            "openness_to_experience": 55,
+            "assertiveness": 70,
+            "stubbornness": 45,
+            "optimism": 72,
+            "impulsivity": 15
+          },
+          "communication": {
+            "vocal_tendency": 72,
+            "persuasiveness": 68,
+            "information_sharing": 85
+          },
+          "emotional_psychological": {
+            "empathy": 85,
+            "self_preservation_drive": 40,
+            "authority_trust": 65,
+            "claustrophobia": 12,
+            "prior_trauma": 50,
+            "denial_tendency": 8
+          },
+          "physical": {
+            "mobility": 60,
+            "strength": 50,
+            "pain_tolerance": 72
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 40,
+            "emergency_training": 85,
+            "general_knowledge": 88
+          }
+        }
+      },
+      {
+        "id": "agent_05",
+        "name": "Jordan Chen",
+        "age": 19,
+        "description": "College freshman, socially anxious gamer with little real-world crisis experience. Intelligent but overthinks under pressure. Physically fit from recreational sports but has never faced a real emergency. Strong herding instinct — will follow the crowd.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 72,
+            "stress_tolerance": 30,
+            "emotional_volatility": 65,
+            "freeze_tendency": 55,
+            "emotional_recovery_speed": 35
+          },
+          "decision_making": {
+            "decision_speed": 28,
+            "situational_awareness": 42,
+            "risk_taking": 20,
+            "analytical_thinking": 70,
+            "adaptability": 45,
+            "creativity": 58
+          },
+          "social_behavior": {
+            "leadership": 8,
+            "altruism": 42,
+            "compliance": 82,
+            "herding_tendency": 88,
+            "cooperation": 55,
+            "competitiveness": 25
+          },
+          "general_personality": {
+            "introversion": 82,
+            "agreeableness": 65,
+            "conscientiousness": 48,
+            "neuroticism": 70,
+            "openness_to_experience": 60,
+            "assertiveness": 15,
+            "stubbornness": 25,
+            "optimism": 40,
+            "impulsivity": 35
+          },
+          "communication": {
+            "vocal_tendency": 20,
+            "persuasiveness": 15,
+            "information_sharing": 30
+          },
+          "emotional_psychological": {
+            "empathy": 55,
+            "self_preservation_drive": 65,
+            "authority_trust": 70,
+            "claustrophobia": 58,
+            "prior_trauma": 5,
+            "denial_tendency": 45
+          },
+          "physical": {
+            "mobility": 78,
+            "strength": 55,
+            "pain_tolerance": 35
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 20,
+            "emergency_training": 5,
+            "general_knowledge": 40
+          }
+        }
+      },
+      {
+        "id": "agent_06",
+        "name": "Patricia Harmon",
+        "age": 73,
+        "description": "Retired schoolteacher, sharp-minded but physically limited. Has survived a house fire decades ago — carries both trauma and hard-won survival knowledge. Calm voice of reason but cannot move fast. Will refuse to leave without helping others nearby.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 35,
+            "stress_tolerance": 68,
+            "emotional_volatility": 30,
+            "freeze_tendency": 25,
+            "emotional_recovery_speed": 60
+          },
+          "decision_making": {
+            "decision_speed": 45,
+            "situational_awareness": 65,
+            "risk_taking": 30,
+            "analytical_thinking": 72,
+            "adaptability": 40,
+            "creativity": 50
+          },
+          "social_behavior": {
+            "leadership": 55,
+            "altruism": 90,
+            "compliance": 70,
+            "herding_tendency": 30,
+            "cooperation": 82,
+            "competitiveness": 5
+          },
+          "general_personality": {
+            "introversion": 30,
+            "agreeableness": 82,
+            "conscientiousness": 85,
+            "neuroticism": 38,
+            "openness_to_experience": 40,
+            "assertiveness": 60,
+            "stubbornness": 68,
+            "optimism": 62,
+            "impulsivity": 12
+          },
+          "communication": {
+            "vocal_tendency": 65,
+            "persuasiveness": 72,
+            "information_sharing": 80
+          },
+          "emotional_psychological": {
+            "empathy": 88,
+            "self_preservation_drive": 35,
+            "authority_trust": 75,
+            "claustrophobia": 30,
+            "prior_trauma": 78,
+            "denial_tendency": 10
+          },
+          "physical": {
+            "mobility": 22,
+            "strength": 15,
+            "pain_tolerance": 55
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 50,
+            "emergency_training": 30,
+            "general_knowledge": 72
+          }
+        }
+      },
+      {
+        "id": "agent_07",
+        "name": "Ryan Callister",
+        "age": 26,
+        "description": "Nightclub promoter, loud and charismatic but shallow under pressure. Used to managing crowds socially but has zero emergency skills. Impulsive, self-interested when scared, but capable of rallying people if he keeps his composure. Extremely fit.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 55,
+            "stress_tolerance": 38,
+            "emotional_volatility": 70,
+            "freeze_tendency": 15,
+            "emotional_recovery_speed": 45
+          },
+          "decision_making": {
+            "decision_speed": 80,
+            "situational_awareness": 55,
+            "risk_taking": 78,
+            "analytical_thinking": 30,
+            "adaptability": 65,
+            "creativity": 50
+          },
+          "social_behavior": {
+            "leadership": 58,
+            "altruism": 28,
+            "compliance": 30,
+            "herding_tendency": 35,
+            "cooperation": 40,
+            "competitiveness": 82
+          },
+          "general_personality": {
+            "introversion": 8,
+            "agreeableness": 38,
+            "conscientiousness": 25,
+            "neuroticism": 50,
+            "openness_to_experience": 72,
+            "assertiveness": 82,
+            "stubbornness": 40,
+            "optimism": 70,
+            "impulsivity": 85
+          },
+          "communication": {
+            "vocal_tendency": 92,
+            "persuasiveness": 75,
+            "information_sharing": 42
+          },
+          "emotional_psychological": {
+            "empathy": 28,
+            "self_preservation_drive": 88,
+            "authority_trust": 22,
+            "claustrophobia": 20,
+            "prior_trauma": 10,
+            "denial_tendency": 40
+          },
+          "physical": {
+            "mobility": 92,
+            "strength": 75,
+            "pain_tolerance": 55
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 70,
+            "emergency_training": 8,
+            "general_knowledge": 25
+          }
+        }
+      },
+      {
+        "id": "agent_08",
+        "name": "Mei Lin Zhao",
+        "age": 45,
+        "description": "Architect who designed the building being simulated. Knows every exit, stairwell, and structural weakness. Quiet and methodical, avoids confrontation. Will share critical layout information if asked but won't volunteer it loudly. Moderate fitness.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 38,
+            "stress_tolerance": 65,
+            "emotional_volatility": 28,
+            "freeze_tendency": 30,
+            "emotional_recovery_speed": 62
+          },
+          "decision_making": {
+            "decision_speed": 55,
+            "situational_awareness": 88,
+            "risk_taking": 35,
+            "analytical_thinking": 92,
+            "adaptability": 70,
+            "creativity": 82
+          },
+          "social_behavior": {
+            "leadership": 30,
+            "altruism": 65,
+            "compliance": 60,
+            "herding_tendency": 22,
+            "cooperation": 68,
+            "competitiveness": 18
+          },
+          "general_personality": {
+            "introversion": 75,
+            "agreeableness": 62,
+            "conscientiousness": 88,
+            "neuroticism": 42,
+            "openness_to_experience": 70,
+            "assertiveness": 32,
+            "stubbornness": 48,
+            "optimism": 58,
+            "impulsivity": 15
+          },
+          "communication": {
+            "vocal_tendency": 28,
+            "persuasiveness": 45,
+            "information_sharing": 50
+          },
+          "emotional_psychological": {
+            "empathy": 60,
+            "self_preservation_drive": 62,
+            "authority_trust": 55,
+            "claustrophobia": 18,
+            "prior_trauma": 15,
+            "denial_tendency": 20
+          },
+          "physical": {
+            "mobility": 58,
+            "strength": 42,
+            "pain_tolerance": 48
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 98,
+            "emergency_training": 45,
+            "general_knowledge": 85
+          }
+        }
+      },
+      {
+        "id": "agent_09",
+        "name": "Tommy Russo",
+        "age": 8,
+        "description": "Young child attending an event with family. Completely dependent on adults for decision-making. Will cry and freeze. High compliance if an adult takes their hand. Very fast for his size but zero knowledge or training. Represents the vulnerability factor in the simulation.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 92,
+            "stress_tolerance": 10,
+            "emotional_volatility": 95,
+            "freeze_tendency": 80,
+            "emotional_recovery_speed": 25
+          },
+          "decision_making": {
+            "decision_speed": 15,
+            "situational_awareness": 18,
+            "risk_taking": 10,
+            "analytical_thinking": 12,
+            "adaptability": 20,
+            "creativity": 15
+          },
+          "social_behavior": {
+            "leadership": 2,
+            "altruism": 15,
+            "compliance": 90,
+            "herding_tendency": 85,
+            "cooperation": 70,
+            "competitiveness": 5
+          },
+          "general_personality": {
+            "introversion": 55,
+            "agreeableness": 72,
+            "conscientiousness": 15,
+            "neuroticism": 80,
+            "openness_to_experience": 50,
+            "assertiveness": 8,
+            "stubbornness": 60,
+            "optimism": 55,
+            "impulsivity": 70
+          },
+          "communication": {
+            "vocal_tendency": 85,
+            "persuasiveness": 5,
+            "information_sharing": 10
+          },
+          "emotional_psychological": {
+            "empathy": 40,
+            "self_preservation_drive": 50,
+            "authority_trust": 88,
+            "claustrophobia": 72,
+            "prior_trauma": 2,
+            "denial_tendency": 60
+          },
+          "physical": {
+            "mobility": 65,
+            "strength": 8,
+            "pain_tolerance": 15
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 5,
+            "emergency_training": 2,
+            "general_knowledge": 8
+          }
+        }
+      },
+      {
+        "id": "agent_10",
+        "name": "Sven Eriksson",
+        "age": 38,
+        "description": "Off-duty firefighter attending a concert. Extensive emergency training kicks in automatically. Physically powerful and fearless, but has compassion fatigue from years on the job — may deprioritize emotional support. Will run toward danger, not away from it. Struggles with authority when he believes he knows better.",
+        "attributes": {
+          "stress_response": {
+            "panic_susceptibility": 8,
+            "stress_tolerance": 95,
+            "emotional_volatility": 12,
+            "freeze_tendency": 3,
+            "emotional_recovery_speed": 90
+          },
+          "decision_making": {
+            "decision_speed": 88,
+            "situational_awareness": 92,
+            "risk_taking": 82,
+            "analytical_thinking": 70,
+            "adaptability": 75,
+            "creativity": 58
+          },
+          "social_behavior": {
+            "leadership": 88,
+            "altruism": 78,
+            "compliance": 35,
+            "herding_tendency": 5,
+            "cooperation": 65,
+            "competitiveness": 30
+          },
+          "general_personality": {
+            "introversion": 42,
+            "agreeableness": 45,
+            "conscientiousness": 82,
+            "neuroticism": 18,
+            "openness_to_experience": 48,
+            "assertiveness": 88,
+            "stubbornness": 65,
+            "optimism": 55,
+            "impulsivity": 35
+          },
+          "communication": {
+            "vocal_tendency": 80,
+            "persuasiveness": 72,
+            "information_sharing": 75
+          },
+          "emotional_psychological": {
+            "empathy": 42,
+            "self_preservation_drive": 35,
+            "authority_trust": 40,
+            "claustrophobia": 5,
+            "prior_trauma": 70,
+            "denial_tendency": 3
+          },
+          "physical": {
+            "mobility": 90,
+            "strength": 92,
+            "pain_tolerance": 88
+          },
+          "knowledge_preparation": {
+            "environment_familiarity": 25,
+            "emergency_training": 98,
+            "general_knowledge": 95
+          }
+        }
+      }
+    ]
+  }
