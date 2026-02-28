@@ -53,3 +53,16 @@ def move_one_step(direction: str, agent: "LLMAgent") -> str:
 
     agent.model.grid.move_agent(agent, new_pos)
     return f"Moved {direction} to {new_pos}."
+
+
+@tool
+def stay_put(agent: "LLMAgent") -> str:
+    """Stay in the current position and do nothing this turn.
+
+    Args:
+        agent: Provided automatically.
+
+    Returns:
+        A string confirming the agent stayed put.
+    """
+    return f"Stayed at {agent.pos}."

@@ -39,8 +39,10 @@ class HumanLLMAgent(LLMAgent):
             f"The exit door is at {door_position}. "
             f"Impassable walls are at: {obstacles_str}.\n\n"
             "Each turn you receive an observation of your position and all other participants. "
-            "Call move_one_step(direction) to move one cell. "
-            "Direction must be one of: North, South, East, West, NorthEast, NorthWest, SouthEast, SouthWest. "
+            "Choose exactly one action:\n"
+            "- move_one_step(direction): move one cell. "
+            "Direction must be one of: North, South, East, West, NorthEast, NorthWest, SouthEast, SouthWest.\n"
+            "- stay_put(): remain in your current position this turn.\n"
             "Your goal is to reach the door and exit."
         )
 
@@ -48,7 +50,7 @@ class HumanLLMAgent(LLMAgent):
             f"Grid: {w}×{h} (x: 0–{w - 1}, y: 0–{h - 1}). "
             f"Exit door: {door_position}. "
             f"Walls: {obstacles_str}. "
-            "Move toward the door."
+            "Move toward the door, or stay_put() if you must wait."
         )
 
         super().__init__(
