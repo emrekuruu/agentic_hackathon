@@ -40,6 +40,69 @@ def _fit_rect_within_grid(
     return x0, y0, x1, y1
 
 
+def _compute_zoom_bounds(
+    history: list[dict],
+    door_positions: list[tuple[int, int]],
+    obstacles: list[tuple[int, int]] | None,
+    width: int,
+    height: int,
+    padding: float = 1.5,
+) -> tuple[float, float, float, float]:
+    """Compute axis limits that zoom to simulation activity."""
+    points: list[tuple[float, float]] = []
+    for frame in history:
+        for pos in frame.values():
+            if pos == "exited":
+                continue
+            if isinstance(pos, (tuple, list)) and len(pos) == 2:
+                points.append((float(pos[0]), float(pos[1])))
+
+    for x, y in door_positions:
+        points.append((float(x), float(y)))
+    for x, y in (obstacles or []):
+        points.append((float(x), float(y)))
+
+    if not points:
+        return -0.5, width - 0.5, -0.5, height - 0.5
+
+    min_x = max(-0.5, min(p[0] for p in points) - padding)
+    max_x = min(width - 0.5, max(p[0] for p in points) + padding)
+    min_y = max(-0.5, min(p[1] for p in points) - padding)
+    max_y = min(height - 0.5, max(p[1] for p in points) + padding)
+
+    # Keep a minimum viewport size so animation remains readable.
+    min_span = 8.0
+    x_span = max_x - min_x
+    y_span = max_y - min_y
+    if x_span < min_span:
+        cx = (min_x + max_x) / 2.0
+        min_x = cx - (min_span / 2.0)
+        max_x = cx + (min_span / 2.0)
+    if y_span < min_span:
+        cy = (min_y + max_y) / 2.0
+        min_y = cy - (min_span / 2.0)
+        max_y = cy + (min_span / 2.0)
+
+    if min_x < -0.5:
+        max_x += (-0.5 - min_x)
+        min_x = -0.5
+    if max_x > width - 0.5:
+        min_x -= (max_x - (width - 0.5))
+        max_x = width - 0.5
+    if min_y < -0.5:
+        max_y += (-0.5 - min_y)
+        min_y = -0.5
+    if max_y > height - 0.5:
+        min_y -= (max_y - (height - 0.5))
+        max_y = height - 0.5
+
+    min_x = max(-0.5, min_x)
+    max_x = min(width - 0.5, max_x)
+    min_y = max(-0.5, min_y)
+    max_y = min(height - 0.5, max_y)
+    return min_x, max_x, min_y, max_y
+
+
 def animate(
     history: list[dict],
     width: int,
@@ -62,12 +125,19 @@ def animate(
     agent_names = list(history[0].keys())
     color_map = {name: _COLORS[i % len(_COLORS)] for i, name in enumerate(agent_names)}
 
-    fig, ax = plt.subplots(figsize=(13, 8))
+    fig, ax = plt.subplots(figsize=(11.5, 8))
     fig.patch.set_facecolor("#1a1a2e")
     ax.set_facecolor("#16213e")
 
-    ax.set_xlim(-0.5, width - 0.5)
-    ax.set_ylim(-0.5, height - 0.5)
+    zoom_min_x, zoom_max_x, zoom_min_y, zoom_max_y = _compute_zoom_bounds(
+        history=history,
+        door_positions=door_positions,
+        obstacles=obstacles,
+        width=width,
+        height=height,
+    )
+    ax.set_xlim(zoom_min_x, zoom_max_x)
+    ax.set_ylim(zoom_min_y, zoom_max_y)
     ax.set_aspect("equal")
     ax.set_axis_off()
 
@@ -102,28 +172,6 @@ def animate(
             fontsize=12, color="#555577", zorder=3,
         )
 
-    # Legend
-    legend_patches = [mpatches.Patch(color=color_map[n], label=n) for n in agent_names]
-    legend_patches.append(
-        mpatches.Patch(facecolor="#ffff00", edgecolor="#ffff00", label="Door")
-    )
-    if obstacles:
-        legend_patches.append(
-            mpatches.Patch(facecolor="#2c2c54", edgecolor="#555577", label="Wall")
-        )
-    if fire_history:
-        legend_patches.append(
-            mpatches.Patch(facecolor="#ff0000", edgecolor="#ff0000", label="Fire")
-        )
-    ax.legend(
-        handles=legend_patches,
-        loc="upper left",
-        bbox_to_anchor=(1.3, 1.0),
-        borderaxespad=0.0,
-        facecolor="#0f3460",
-        labelcolor="white",
-    )
-
     title = ax.set_title("", color="white", fontsize=13, pad=10)
     fire_im = ax.imshow(
         np.zeros((height, width), dtype=int),
@@ -137,6 +185,7 @@ def animate(
     )
 
     # One marker + label per agent (marker is in data units so scale stays consistent)
+    marker_radius = 0.6
     markers: dict = {}
     labels: dict = {}
     for name in agent_names:
@@ -144,18 +193,19 @@ def animate(
         x0, y0 = first if first != "exited" else (0, 0)
         marker = mpatches.Circle(
             (x0, y0),
-            radius=0.33,
+            radius=marker_radius,
             facecolor=color_map[name],
             edgecolor="white",
             linewidth=1.2,
             zorder=5,
         )
-        marker.set_visible(first != "exited")
         ax.add_patch(marker)
+        marker.set_visible(first != "exited")
         lbl = ax.text(
-            x0, y0 + 0.35, name[0],
+            x0, y0 + marker_radius + 0.18, name,
             ha="center", va="center",
-            fontsize=9, color="white", fontweight="bold", zorder=6,
+            fontsize=7.5, color="white", fontweight="bold", zorder=6,
+            clip_on=False,
         )
         lbl.set_visible(first != "exited")
         markers[name] = marker
@@ -195,14 +245,15 @@ def animate(
 
         for name in agent_names:
             pos = _interp_pos(step_data[name], next_data[name], alpha)
+            marker = markers[name]
             if pos is None:
-                markers[name].set_visible(False)
+                marker.set_visible(False)
                 labels[name].set_visible(False)
             else:
                 x, y = pos
-                markers[name].center = (x, y)
-                markers[name].set_visible(True)
-                labels[name].set_position((x, y + 0.35))
+                marker.center = (x, y)
+                marker.set_visible(True)
+                labels[name].set_position((x, y + marker_radius + 0.18))
                 labels[name].set_visible(True)
 
         frame_fires = []
@@ -226,6 +277,6 @@ def animate(
         repeat=True,
     )
 
-    fig.subplots_adjust(right=0.5, left=0.04, top=0.95, bottom=0.04)
+    fig.subplots_adjust(left=0.03, right=0.99, top=0.95, bottom=0.04)
     plt.show()
     return ani
